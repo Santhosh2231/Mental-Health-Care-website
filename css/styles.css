@@ -1,0 +1,37 @@
+.footer{
+            
+    margin: 0px auto ;
+    padding : 20px 0px 20px 0px;
+    background-color: #D1C4E9;
+}
+
+.row-header{
+    margin:0px auto;
+    padding:0px;
+}
+.row-content {
+    margin:0px auto;
+    border-width:2px;
+    border-color: black;
+    padding: 50px 20px 50px 30px;
+    border-bottom: 1px ridge;
+    min-height:400px;
+    background-color: floralwhite;
+}
+.jumbotron{
+    padding: 60px 30px 10px 30px;
+    margin: 0px auto;
+    background: #9575CD;
+    color: floralwhite;
+}
+.cardsignup{
+    margin: 10px 350px 10px 350px;
+}
+.navbar-dark {
+ background-color: #512DA8;
+}
+
+a:hover{
+    text-decoration: none;
+    color: hotpink;
+}
