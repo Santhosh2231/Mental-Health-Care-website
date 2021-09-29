@@ -1,7 +1,50 @@
 <?php
-    session_start();
-?>
-<!DOCTYPE html>
+$login = false;
+$showError = false;
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    include 'connect.php';
+    $email = $_POST["email"];
+    $password = $_POST["password"]; 
+    $type = $_POST["type"];
+    
+    if($type=="Counsellor"){
+        $sql = "Select * from counsellors where email='$email' AND password='$password'";
+        $result = mysqli_query($conn, $sql);
+        $num = mysqli_num_rows($result);
+        if ($num > 0){
+            $login = true;
+            session_start();
+            $_SESSION['loggedin'] = true;
+            $sql = "select s.no from counsellors where email='$email' AND password='$password'";
+            $id = mysqli_query($conn,$sql);
+            $_SESSION['id'] = $id;
+            header("location: home.html");
+
+        } 
+        else{
+            $showError = "Invalid Credentials";
+        }
+    }else{
+        $sql = "Select * from users where email='$email' AND password='$password'";
+        $result = mysqli_query($conn, $sql);
+        $num = mysqli_num_rows($result);
+        if ($num > 0){
+            $login = true;
+            session_start();
+            $_SESSION['loggedin'] = true;
+            $sql = "select s.no from counsellors where email='$email' AND password='$password'";
+            $id = mysqli_query($conn,$sql);
+            $_SESSION['id'] = $id;
+            header("location: home.html");
+
+        } 
+        else{
+            $showError = "Invalid Credentials";
+        }
+    }
+}
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,7 +81,7 @@
         </div>
     </nav>
     <header>
-        <div class="jumbotron">
+    <div class="jumbotron">
             <div class="container">
                 <div class="row row-header " style="margin: 10px; padding-bottom: 0%;">
                     <div class="col-12 col-sm-6">
@@ -46,12 +89,12 @@
                         <p>Our vision is to ...........<br>
                             Our mission is to ............</p>
                     </div>
-                    
+            
                 </div>
             </div>
         </div>
     </header>
-    <div class="container col-sm-3 offset-md-4" style="margin-top: 10px; margin-bottom: 10px;">
+    <div class="container col-12 col-sm-3 offset-md-4" style="margin-top: 10px; margin-bottom: 10px;">
         <div class="card" style="width: 30rem;">
             <div class="card-header">
             <h2 class="text-center">Login</h2> 
@@ -83,7 +126,7 @@
                         </div>
                         <br>
                         <div class="text-center">
-                            <h5>New user? <a href="./signup.html">signup</a></h5>
+                            <h5>New user? <a href="./signup.php">signup</a></h5>
                         </div>
                     </form>
                 </div>
@@ -135,40 +178,3 @@
      <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-<?php
-    include './connect.php';
-     // will not expire until user closes the browser
-
-    $conn = OpenCon();
-    if (isset($_POST['email']) && isset($_POST['password'] )) {
-        loginSuccess();
-    } else if (isset($_SESSION["HID"])) {
-        header('Location: profile.php');
-        die();
-    }
-
-
-    function loginSuccess() {
-        global $conn;
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $type = $_POST['type'];
-        if ($type=="Counsellor"){
-
-        }
-        else{
-            $sql = "select HID from users where email='$email' and password='$password'";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $_SESSION['userID'] = $row['HID'];
-                header('Location: menu.html');
-                die();
-            } else {
-                echo "<div class='alert alert-primary'>Cannot login.<hr><hr><hr><h3>hello</h3> Try Again.</div>";
-            }
-        }
-    }
-    
-?>

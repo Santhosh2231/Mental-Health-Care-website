@@ -1,7 +1,45 @@
 <?php
-    session_start();
-?>
-<!DOCTYPE html>
+$showAlert = false;
+$showError = false;
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    include 'connect.php';
+
+
+    $type = $_POST["type"];
+    $firstname = $_POST["firstname"];
+    $secondname = $_POST["lastname"];
+    $password = $_POST["password"];
+    $conpassword = $_POST["conpassword"];
+    $email = $_POST["email"];
+    $age = $_POST["age"] ;
+    $gender = $_POST["gender"];
+    $location = $_POST["location"] ;
+    $phone = $_POST["phone"] ;
+
+    $exists=false;
+    if(($password == $conpassword) && $exists==false){
+        if($type=="Counsellor"){
+            $sql = "INSERT INTO `counsellors` (`s.no`,`firstname`, `secondname`, `email`, `password`, `age`, `gender`, `location`, `phone`) VALUES (NULL,'$firstname', '$secondname', '$email', '$password', '$age', '$gender', '$location', '$phone')";
+            $result = mysqli_query($conn, $sql);
+            if ($result){
+                $showAlert = true;
+                
+            }
+        }
+        else{
+            $sql = "INSERT INTO `users` (`s.no`,`firstname`, `secondname`, `email`, `password`, `age`, `gender`, `location`, `phone`) VALUES (NULL,'$firstname', '$secondname', '$email', '$password', $age, '$gender', '$location', '$phone')";
+            $result = mysqli_query($conn, $sql);
+            if ($result){
+                $showAlert = true;
+                header("location: welcome.php");
+            }
+        }
+    }
+    else{
+        $showError = "Passwords do not match";
+    }
+}
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -28,11 +66,11 @@
                     </li>
                     <li class="nav-item "><a class="nav-link" href="about.html"><span class="fa fa-info"></span> About
                         </a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html"><span
+                    <li class="nav-item"><a class="nav-link" href="login.php"><span
                                 class="fa fa-address-card fa-ig"></span> Login </a></li>
                     <li class="nav-item active"><a class="nav-link" href="#"><span
                                     class="fa fa-ig"></span> Signup </a></li>
-                    <li class="nav-item"><a class="nav-link" href="admin.html"><i class="fa fa-sign-out"></i> Admin Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.php"><i class="fa fa-sign-out"></i> Admin Login</a></li>
                 </ul>
             </div>
         </div>
@@ -94,12 +132,12 @@
                                     <input type="password" name="password" id="password" class="form-control" required></input>
                                 </div>
                             </div>
-                            <!-- <div class="col">
+                            <div class="col">
                                 <div class="form-group">
                                     <label for="conpassword" id="conpassword"><h5>Confirm Password: </h5></input>
                                     <input type="password" name="conpassword" id="conpassword" class="form-control" required></input>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                 
                         <div class="row">
@@ -164,6 +202,26 @@
                             <button class="btn btn-primary" type="submit" value="submit">Sign up </button>
                         </div>
                     </form>
+                    <?php  
+                        
+                        if($showAlert){
+                        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Success!</strong> Your account is now created and you can login
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div> ';
+                        }
+                        if($showError){
+                        echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error!</strong> '. $showError.'
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div> ';
+                        }
+                    
+                    ?>
                     <div class="alert alert-info mt-3" id="login-link">Already have an account? Login <a href="./login.html">here</a></p>
                 </div>
             </body>
@@ -214,87 +272,6 @@
      <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
      <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
      <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+     <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 </body>
 </html>
-
-<?php
-    include 'connect.php';
-    $conn = OpenCon();
-
-    if (isset($_POST["type"])) {
-        addUser(); // only add user to DB if form is submitted
-    }
-
-    // add new user to DB
-    function addUser() {
-        global $conn;
-        // get all user data submitted from signup form
-        $type = $_POST["type"];
-        $firstname = $_POST["firstname"];
-        $secondname = $_POST["lastname"];
-        $password = $_POST["password"];
-        $email = $_POST["email"];
-        $age = $_POST["age"] ;
-        $gender = $_POST["gender"];
-        $location = $_POST["location"] ;
-        $phone = $_POST["phone"] ;
-
-        if (!$type) {
-            returnError();
-            return;
-        }
-        
-        $sql = "insert into users (firstname,secondname,email,password,age,gender, location, phone)"; 
-        $sql .= "values ('$firstname','$secondname','$email','$password',  $age,'$gender', '$location',  '$phone');";
-        $result = $conn->query($sql);
-        if (!$result) {
-            returnError();
-            return;
-        }
-    
-        $sql = "select HID from Users where email='$email';";
-        $result= $conn->query($sql); // get assigned userID to new user from table
-        if (!$result) {
-            returnError();
-            echo "Santhosh<br><br>santhosh<hr>";
-            return;
-        }
-    
-        $id = $result->fetch_assoc()["HID"];
-        $_SESSION["username"] = $id; // set session variable to user ID
-    
-        // add user to either counsellor or helpseeker table
-        if ($type == "Counsellor") { 
-            $yearsExp = $_POST["yearsExp"];
-            $cert = $_POST["cert"];
-            $sql = "insert into Counsellor (userID, yearsExperience, certification) values";
-            $sql .= "($id, $yearsExp, '$cert');";
-            $result = $conn->query($sql);
-
-            if (!$result) {
-                returnError();
-                return;
-            } else {
-                header("Location: home.html"); // redirect to new profile
-            }
-            
-        } else {
-            $sql = "insert into HelpSeeker (userID, numCounsellors, numReviews) values ($id, 0, 0);";
-            $result = $conn->query($sql);
-
-            if (!$result) {
-                returnError();
-                return;
-            } else {
-                header("Location: home.html"); 
-            }
-        }
-    }
-
-    // user creation error
-    function returnError() {
-        echo "<div class='alert alert-primary'> Sorry, could not create your account. Try again</div>";
-    }
-?>
-
-
