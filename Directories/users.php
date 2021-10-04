@@ -19,14 +19,14 @@
             <!-- <a class="navbar-brand" href="#"><img src="logoi.png" height="30" width="41"></a> -->
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a class="nav-link" href="home.html"><h5><b>Mental Health Care</b></h5></a> </li>
-                    <li class="nav-item active "><a class="nav-link" href="home.html"><span class="fa fa-home"></span> Home </a>
+                    <li class="nav-item active"><a class="nav-link" href="home.php"><h5><b>Mental Health Care</b></h5></a> </li>
+                    <li class="nav-item "><a class="nav-link" href="home.php"><span class="fa fa-home"></span> Home </a>
                     </li>
-                    <li class="nav-item "><a class="nav-link" href="about.html"><span class="fa fa-info"></span> About
+                    <li class="nav-item active"><a class="nav-link" href="about.php"><span class="fa fa-info"></span> About
                         </a></li>
-                    <li class="nav-item"><a class="nav-link" href="menu.html"><span class="fa fa-list fa-ig"></span> Menu </a>
+                    <li class="nav-item"><a class="nav-link" href="menu.php"><span class="fa fa-list fa-ig"></span> Menu </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html"><span
+                    <li class="nav-item"><a class="nav-link" href="contact.php"><span
                                 class="fa fa-address-card fa-ig"></span> Contact </a></li>
                     <li class="nav-item"><a class="nav-link" href="signout.php"><i class="fa fa-sign-out"></i> Signout</a></li>
                 </ul>
@@ -47,16 +47,32 @@
             </div>
         </div>
     </header>
+    <div class="container">
+        <div class="row">
+            <ol class="col-12 breadcrumb">
+                <li class="breadcrumb-item"><a href="../home.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="../menu.html">Menu</a></li>
+                <li class="breadcrumb-item"><a href="../menu.html">Directories</a></li>
+                <li class="breadcrumb-item active">Users</li>
+            </ol>
+            <div class="col-12">
+               <h3>Users</h3>
+               <hr>
+            </div>
+        </div>
+
+
+    </div>
     <footer class="footer ">
         <div class="container">
             <div class="row">             
                 <div class="col-4 offset-1 col-sm-2">
                     <h5>Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="home.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="contact.html" >Contact</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="#">Menu</a></li>
+                        <li><a href="#" >Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-7 col-sm-5">
@@ -86,8 +102,8 @@
         </div>
     </footer>
      <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
-     <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
-     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+     <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,32 +1,45 @@
 .footer{
-            
-    margin: 0px auto ;
+    margin-top: 10px;
     padding : 20px 0px 20px 0px;
     background-color: #D1C4E9;
 }
-
+body{
+    background-color: rgb(235, 229, 233);
+}
 .row-header{
     margin:0px auto;
     padding:0px;
 }
+
 .row-content {
     margin:0px auto;
     border-width:2px;
-    border-color: black;
-    padding: 50px 20px 50px 30px;
+    border-color: black solid;
+    padding: auto;
     border-bottom: 1px ridge;
-    min-height:400px;
+    /* min-height:400px; */
     background-color: floralwhite;
 }
+
 .jumbotron{
     padding: 60px 30px 10px 30px;
     margin: 0px auto;
     background: #9575CD;
     color: floralwhite;
 }
-.cardsignup{
-    margin: 10px 350px 10px 350px;
+.table{
+    border: 3px solid black;
+    border-collapse: collapse;
 }
+th,td{
+    background-color: #96D4D4;
+}
+.card{
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 10px 0 128px 0 rgba(0,0,0,0.1),
+                10px 32px 64px -48px rgba(0,0,0,0.5);
+  }
 .navbar-dark {
  background-color: #512DA8;
 }
@@ -34,4 +47,9 @@
 a:hover{
     text-decoration: none;
     color: hotpink;
+}
+.rounded-circle{
+    height: 120px;
+    width: 120px;
+    border:floralwhite solid 2px;
 }

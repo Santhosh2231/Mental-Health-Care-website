@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+    include '../connect.php';
+
+
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +13,7 @@
     <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
     <link href="../css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <title>Profile</title>
 </head>
 <body>
@@ -19,16 +25,16 @@
             <!-- <a class="navbar-brand" href="#"><img src="logoi.png" height="30" width="41"></a> -->
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="#"><h5><b>Mental Health Care</b></h5></a> </li>
-                    <li class="nav-item "><a class="nav-link" href="profile.html"><span class="fa fa-home"></span> Home </a>
+                    <li class="nav-item active"><a class="nav-link" href="home.php"><h5><b>Mental Health Care</b></h5></a> </li>
+                    <li class="nav-item "><a class="nav-link" href="home.php"><span class="fa fa-home"></span> Home </a>
                     </li>
-                    <li class="nav-item "><a class="nav-link" href="aboutus.html"><span class="fa fa-info"></span> About
+                    <li class="nav-item active"><a class="nav-link" href="about.php"><span class="fa fa-info"></span> About
                         </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-ig"></span> Menu </a>
+                    <li class="nav-item"><a class="nav-link" href="menu.php"><span class="fa fa-list fa-ig"></span> Menu </a>
                     </li>
-                    <li class="nav-item active"><a class="nav-link" href="#"><span
+                    <li class="nav-item"><a class="nav-link" href="contact.php"><span
                                 class="fa fa-address-card fa-ig"></span> Contact </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-sign-out"></i> Signout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signout.php"><i class="fa fa-sign-out"></i> Signout</a></li>
                 </ul>
             </div>
         </div>
@@ -50,9 +56,9 @@
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">
-                <li class="breadcrumb-item"><a href="../home.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="../menu.html">Menu</a></li>
-                <li class="breadcrumb-item"><a href="../menu.html">Appointments</a></li>
+                <li class="breadcrumb-item"><a href="../home.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="../menu.php">Menu</a></li>
+                <li class="breadcrumb-item"><a href="../menu.php">Appointments</a></li>
                 <li class="breadcrumb-item active">Book Appointments</li>
             </ol>
             <div class="col-12">
@@ -60,8 +66,37 @@
                <hr>
             </div>
         </div>
-
-
+        <div class="container" style="background-color:floralwhite; padding: 10px 10px 10px 10px;">
+            <table class="table" id="myTable">
+                <thead>
+                    <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Counsellor Name</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Years of Experience</th>
+                    <th scope="col">Book Appointment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php 
+                    $sql = "SELECT counsellors.cno cno,counsellors.firstname Cname,review.rating rating,counsellor_exper.counsellor_exp expe FROM `counsellors`";
+                    $sql .= "LEFT JOIN review on counsellors.cno=review.counsellorid LEFT JOIN counsellor_exper on counsellors.cno=counsellor_exper.cno;";
+                    $result = mysqli_query($conn, $sql);
+                    $sno = 0;
+                    while($row = mysqli_fetch_assoc($result)){
+                        $sno = $sno + 1;
+                        echo "<tr>
+                        <th class='text-center' scope='row'>". $sno . "</th>
+                        <td > Dr. ". $row['Cname'] . "</td>
+                        <td class='text-center'>". $row['rating'] . "</td>
+                        <td class='text-center'>". $row['expe'] . "</td>
+                        <td class='text-center'><a href='counsellor_booking.php?counsellorid=".$row['cno']."<form action='counsellor_booking.php' method='get' ><button class='book text-center btn btn-sm btn-primary' id=".$row['cno'].">Book Appointment</button></form></a></td>
+                    </tr>";
+                    } 
+                ?>
+                </tbody>
+            </table>
+        </div>
     </div>
     <footer class="footer ">
         <div class="container">
@@ -105,5 +140,11 @@
      <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
      <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
      <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>
 </body>
 </html>

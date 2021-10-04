@@ -19,16 +19,16 @@
             <!-- <a class="navbar-brand" href="#"><img src="logoi.png" height="30" width="41"></a> -->
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="#"><h5><b>Mental Health Care</b></h5></a> </li>
-                    <li class="nav-item "><a class="nav-link" href="profile.html"><span class="fa fa-home"></span> Home </a>
+                    <li class="nav-item active"><a class="nav-link" href="home.php"><h5><b>Mental Health Care</b></h5></a> </li>
+                    <li class="nav-item "><a class="nav-link" href="home.php"><span class="fa fa-home"></span> Home </a>
                     </li>
-                    <li class="nav-item "><a class="nav-link" href="aboutus.html"><span class="fa fa-info"></span> About
+                    <li class="nav-item active"><a class="nav-link" href="about.php"><span class="fa fa-info"></span> About
                         </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-ig"></span> Menu </a>
+                    <li class="nav-item"><a class="nav-link" href="menu.php"><span class="fa fa-list fa-ig"></span> Menu </a>
                     </li>
-                    <li class="nav-item active"><a class="nav-link" href="#"><span
+                    <li class="nav-item"><a class="nav-link" href="contact.php"><span
                                 class="fa fa-address-card fa-ig"></span> Contact </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-sign-out"></i> Signout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signout.php"><i class="fa fa-sign-out"></i> Signout</a></li>
                 </ul>
             </div>
         </div>
@@ -50,13 +50,13 @@
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">
-                <li class="breadcrumb-item"><a href="../home.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="../menu.html">Menu</a></li>
-                <li class="breadcrumb-item"><a href="../menu.html">Directories</a></li>
-                <li class="breadcrumb-item active">Hotlines</li>
+                <li class="breadcrumb-item"><a href="../home.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="../menu.php">Menu</a></li>
+                <li class="breadcrumb-item"><a href="../menu.php">Reviews</a></li>
+                <li class="breadcrumb-item active">View Reviews</li>
             </ol>
             <div class="col-12">
-               <h3>Hotlines</h3>
+               <h3>View Reviews</h3>
                <hr>
             </div>
         </div>

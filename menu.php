@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,16 +19,16 @@
             <!-- <a class="navbar-brand" href="#"><img src="logoi.png" height="30" width="41"></a> -->
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="home.html"><h5><b>Mental Health Care</b></h5></a> </li>
-                    <li class="nav-item "><a class="nav-link" href="home.html"><span class="fa fa-home"></span> Home </a>
+                    <li class="nav-item active"><a class="nav-link" href="home.php"><h5><b>Mental Health Care</b></h5></a> </li>
+                    <li class="nav-item "><a class="nav-link" href="home.php"><span class="fa fa-home"></span> Home </a>
                     </li>
-                    <li class="nav-item "><a class="nav-link" href="about.html"><span class="fa fa-info"></span> About
+                    <li class="nav-item active"><a class="nav-link" href="about.php"><span class="fa fa-info"></span> About
                         </a></li>
-                    <li class="nav-item active"><a class="nav-link" href="menu.html"><span class="fa fa-list fa-ig"></span> Menu </a>
+                    <li class="nav-item"><a class="nav-link" href="menu.php"><span class="fa fa-list fa-ig"></span> Menu </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html"><span
+                    <li class="nav-item"><a class="nav-link" href="contact.php"><span
                                 class="fa fa-address-card fa-ig"></span> Contact </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-sign-out"></i> Signout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signout.php"><i class="fa fa-sign-out"></i> Signout</a></li>
                 </ul>
             </div>
         </div>
@@ -59,7 +60,7 @@
         </div>
 
         <div class="row">
-            <div class="col-8 offset-md-2">
+            <div class="col-12 col-md-8 offset-md-2">
                 <div id="accordion">
                     <div class="card">
                         <div class="card-header" role="tab" id="appointmentshead">
@@ -69,17 +70,18 @@
                             </a>
                         </h3>
                         </div>
-                        <div class="collapse show" id="appointments" data-parent="#accordion">
-                            <div class="card-body col-8 offset-md-3 text-center">
-                                <div class="card" style="width: 18rem;">
-                                    <ul class="list-group list-group-flush">
-                                      <li class="list-group-item"><a href="Appointments/book_appointments.html"><h4>Book Appointments</h4></a></li>
-                                      <li class="list-group-item"><a href="Appointments/view_appointments.html"><h4>View Appointments</h4></a></li>
-                                    </ul>
-                                </div>
+                    </div>
+                    <div class="collapse show" id="appointments" data-parent="#accordion">
+                        <div class="card-body col-12 col-md-8 offset-md-2 text-center">
+                            <div class="card col-12 " style="width: 30rem;">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><a href="Appointments/book_appointments.php"><h4>Book Appointments</h4></a></li>
+                                    <li class="list-group-item"><a href="Appointments/view_appointments.php"><h4>View Appointments</h4></a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+                    
 
                     <div class="card">
                         <div class="card-header" role="tab" id="reviewshead">
@@ -89,13 +91,13 @@
                             </a>
                         </h3>
                         </div>
-                    </div>
-                    <div class="collapse" id="reviews" data-parent="#accordion">
-                        <div class="card-body col-8 offset-md-3 text-center">
-                            <div class="card" style="width: 18rem;">
+                     </div>
+                    <div class="col-12 collapse" id="reviews" data-parent="#accordion">
+                        <div class="card-body col-12 col-md-8 offset-md-2 text-center">
+                            <div class="card col-12" style="width: 30rem;">
                                 <ul class="list-group list-group-flush">
-                                  <li class="list-group-item"><a href="Reviews/view.html"><h4>View Reviews</h4></a></li>
-                                  <li class="list-group-item"><a href="Reviews/write.html"><h4>Write Reviews</h4></a></li>
+                                  <li class="list-group-item"><a href="Reviews/view.php"><h4>View Reviews</h4></a></li>
+                                  <li class="list-group-item"><a href="Reviews/write.php"><h4>Write Reviews</h4></a></li>
                                   
                                 </ul>
                             </div>
@@ -111,16 +113,16 @@
                                 </a>
                             </h3>
                         </div>
-                        <div class="collapse" id="directories" data-parent="#accordion">
-                            <div class="card-body col-8 offset-md-3 text-center">
-                                <div class="card" style="width: 18rem;">
-                                    <ul class="list-group list-group-flush">
-                                      <li class="list-group-item"><a href="Directories/users.html"><h4>Users</h4></a></li>
-                                      <li class="list-group-item"><a href="Directories/Hotlines.html"><h4>Hotlines</h4></a></li>
-                                      <li class="list-group-item"><a href="Directories/resource_centers.html"><h4>Resource Centers</h4></a></li>
-                                      <li class="list-group-item"><a href="Directories/types_of_help.html"><h4>Type of Helps</h4></a></li>
-                                    </ul>
-                                </div>
+                    </div>
+                    <div class="col-12 collapse" id="directories" data-parent="#accordion">
+                        <div class="card-body col-12 col-md-8 offset-md-2 text-center">
+                            <div class="card col-12" style="width: 30rem;">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><a href="Directories/users.php"><h4>Users</h4></a></li>
+                                    <li class="list-group-item"><a href="Directories/Hotlines.php"><h4>Hotlines</h4></a></li>
+                                    <li class="list-group-item"><a href="Directories/resource_centers.php"><h4>Resource Centers</h4></a></li>
+                                    <li class="list-group-item"><a href="Directories/types_of_help.php"><h4>Type of Helps</h4></a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -133,19 +135,18 @@
                                 </a>
                             </h3>
                         </div>
-                        <div class="collapse" id="leaderboard" data-parent="#accordion">
-                            <div class="card-body col-8 offset-md-3 text-center">
-                                <div class="card" style="width: 18rem;">
-                                    <ul class="list-group list-group-flush">
-                                      <li class="list-group-item"><a href="Leaderboard/topcounsellor.html"><h4>Top Counsellor</h4></a></li>
-                                      <li class="list-group-item"><a href="Leaderboard/most_activecounsellor.html"><h4>Most Active Counsellor</h4></a></li>
-                                      <li class="list-group-item"><a href="Leaderboard/most_active_helpseeker.html"><h4>Most Active Helpseeker</h4></a></li>
-                                    </ul>
-                                </div>
+                    </div> 
+                    <div class="col-12 collapse" id="leaderboard" data-parent="#accordion">
+                        <div class="card-body col-12 col-md-8 offset-md-2 text-center">
+                            <div class="card col-12" style="width: 30rem;">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><a href="Leaderboard/topcounsellor.php"><h4>Top Counsellor</h4></a></li>
+                                    <li class="list-group-item"><a href="Leaderboard/most_activecounsellor.php"><h4>Most Active Counsellor</h4></a></li>
+                                    <li class="list-group-item"><a href="Leaderboard/most_active_helpseeker.php"><h4>Most Active Helpseeker</h4></a></li>
+                                </ul>
                             </div>
                         </div>
-                    </div> 
-
+                    </div>
                     <div class="card">
                         <div class="card-header" role="tab" id="otherhead">
                             <h3 class="mb-0">
@@ -154,23 +155,24 @@
                                 </a>
                             </h3>
                         </div>
-                        <div class="collapse" id="other" data-parent="#accordion">
-                            <div class="card-body col-8 offset-md-3 text-center">
-                                <div class="card" style="width: 18rem;">
-                                    <ul class="list-group list-group-flush">
-                                      <li class="list-group-item"><a href="lookup.html"><h4>Lookup</h4></a></li>
-                                      
-                                    </ul>
-                                </div>
+                    </div> 
+                    <div class="collapse" id="other" data-parent="#accordion">
+                        <div class="card-body col-12 col-md-8 offset-md-2 text-center">
+                            <div class="card col-12" style="width: 30rem;">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><a href="lookup.php"><h4>Lookup</h4></a></li>
+                                    
+                                </ul>
                             </div>
                         </div>
-                    </div> 
+                    </div>
 
 
                  </div>
             </div>
         </div>
     </div>
+    <br>
     <footer class="footer">
         <div class="container">
             <div class="row">             

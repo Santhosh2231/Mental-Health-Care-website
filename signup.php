@@ -19,19 +19,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $exists=false;
     if(($password == $conpassword) && $exists==false){
         if($type=="Counsellor"){
-            $sql = "INSERT INTO `counsellors` (`s.no`,`firstname`, `secondname`, `email`, `password`, `age`, `gender`, `location`, `phone`) VALUES (NULL,'$firstname', '$secondname', '$email', '$password', '$age', '$gender', '$location', '$phone')";
+            $sql = "INSERT INTO `counsellors` (`cno`,`firstname`, `secondname`, `email`, `password`, `age`, `gender`, `location`, `phone`) VALUES (NULL,'$firstname', '$secondname', '$email', '$password', '$age', '$gender', '$location', '$phone')";
             $result = mysqli_query($conn, $sql);
             if ($result){
+                $yearsExp = $_POST["yearsExp"];
+                $cert = $_POST["cert"];
+                $sql = "select cno from counsellors where email='$email' AND password='$password'";
+                $result = mysqli_query($conn,$sql);
+                $id = $result->fetch_assoc()["cno"];
+                $sql = "INSERT INTO `counsellor_exper` (`cno`, `counsellor_exp`, `cerfication`) VALUES ('$id', '$yearsExp', '$cert');";
                 $showAlert = true;
+                $result = mysqli_query($conn,$sql);
+                
+                header("location: home.php");
                 
             }
         }
         else{
-            $sql = "INSERT INTO `users` (`s.no`,`firstname`, `secondname`, `email`, `password`, `age`, `gender`, `location`, `phone`) VALUES (NULL,'$firstname', '$secondname', '$email', '$password', $age, '$gender', '$location', '$phone')";
+            $sql = "INSERT INTO `users` (`sno`,`firstname`, `secondname`, `email`, `password`, `age`, `gender`, `location`, `phone`) VALUES (NULL,'$firstname', '$secondname', '$email', '$password', $age, '$gender', '$location', '$phone')";
             $result = mysqli_query($conn, $sql);
             if ($result){
+                $sql = "select sno from users where email='$email' AND password='$password'";
+                $result = mysqli_query($conn,$sql);
+                $id = $result->fetch_assoc()["sno"];
+                $sql = "insert into userdata (sno, noofcounsellings, noofreviews) values ($id, 0, 0);";
+                $result = $conn->query($sql);
                 $showAlert = true;
-                header("location: welcome.php");
+                header("location: home.php");
             }
         }
     }
@@ -53,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Profile</title>
 </head>
 <body>
-    <nav class="navbar navbar-dark navbar-expand-sm bg-primary fixed-top">
+    <nav class="navbar navbar-dark navbar-expand-sm bg-primary fixed">
         <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
                 <span class="navbar-toggler-icon"></span>
@@ -90,8 +104,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>
     </header>
     
-    <div class="container col col-sm-3 offset-md-3 style="margin-top: 10px; margin-bottom: 10px;"">
-        <div class="card " style="width: 45rem;">
+    <div class="container col-12 col-sm-6" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="card col-12" style="width: 45rem;">
             <div class="card-header">
             <h2 class="text-center">Sign Up</h2> 
             </div>
@@ -105,13 +119,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             </select>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label for="firstname" id="firstname"><h5>First Name:</h5></input>
                                     <input name="firstname" id="firstname" class="form-control" required></input>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label for="lastname" id="lastname"><h5>Last Name:</h5></input>
                                     <input name="lastname" id="lastname" class="form-control" required></input>
@@ -182,10 +196,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 <div class="form-group col-md-6">
                                     How many years of experience as a mental health professional do you have?
                                     <select name="yearsExp" class="form-control" id="yearsExp">
-                                        <option value="5"> &lt; 5 years</option>
-                                        <option value="10">5-10 years</option>
-                                        <option value="15">10-15 years</option>
-                                        <option value="20">15+ years</option>
+                                        <option value="1"> &lt; 1 year</option>
+                                        <option value="2">2 years</option>
+                                        <option value="3">3 years</option>
+                                        <option value="4">4 years</option>
+                                        <option value="5"> 5 years</option>
+                                        <option value="6">6 years</option>
+                                        <option value="7">7 years</option>
+                                        <option value="8">8 years</option>
+                                        <option value="9">9 years</option>
+                                        <option value="10">10 years</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-1"></div>

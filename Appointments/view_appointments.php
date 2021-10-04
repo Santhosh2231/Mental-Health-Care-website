@@ -20,9 +20,9 @@
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active"><a class="nav-link" href="home.php"><h5><b>Mental Health Care</b></h5></a> </li>
-                    <li class="nav-item active "><a class="nav-link" href="home.php"><span class="fa fa-home"></span> Home </a>
+                    <li class="nav-item "><a class="nav-link" href="home.php"><span class="fa fa-home"></span> Home </a>
                     </li>
-                    <li class="nav-item "><a class="nav-link" href="about.php"><span class="fa fa-info"></span> About
+                    <li class="nav-item active"><a class="nav-link" href="about.php"><span class="fa fa-info"></span> About
                         </a></li>
                     <li class="nav-item"><a class="nav-link" href="menu.php"><span class="fa fa-list fa-ig"></span> Menu </a>
                     </li>
@@ -33,16 +33,46 @@
             </div>
         </div>
     </nav>
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row row-header " style="margin: 10px; padding-bottom: 0%;">
+                    <div class="col-12 col-sm-6">
+                        <h1 id="title">Mental Health care</h1>
+                        <p>Our vision is to ...........<br>
+                            Our mission is to ............</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <ol class="col-12 breadcrumb">
+                <li class="breadcrumb-item"><a href="../home.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="../menu.html">Menu</a></li>
+                <li class="breadcrumb-item"><a href="../menu.html">Appointments</a></li>
+                <li class="breadcrumb-item active">View Appointments</li>
+            </ol>
+            <div class="col-12">
+               <h3>View Appointments</h3>
+               <hr>
+            </div>
+        </div>
+
+
+    </div>
     <footer class="footer ">
         <div class="container">
             <div class="row">             
                 <div class="col-4 offset-1 col-sm-2">
                     <h5>Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="home.php">Home</a></li>
-                        <li><a href="about.php">About</a></li>
-                        <li><a href="menu.php">Menu</a></li>
-                        <li><a href="contact.php" >Contact</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="#">Menu</a></li>
+                        <li><a href="#" >Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-7 col-sm-5">
@@ -72,100 +102,8 @@
         </div>
     </footer>
      <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
-     <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
-     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+     <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-function build_booking($datecomponents){
-    $table = `<table class="table"><thead><tr>`;
-    for($i=0;$i<7;$i++){
-        // $date = date("d-m-Y",strtotime("+i day"));
-        $date = date('d-m-Y D',strtotime("$i day"));
-        $table.= `<th scope="col">`.$date.`</th>`;
-    }
-    $slotarray = array('Slot A','Slot B','Slot C','Slot D');
-    $table.=`</tr></thead><tbody>`;
-    for($i=0;$i<4;$i++){
-        $table.=`<tr><th scope="row">`.$slotarray[$i].`</th>`;
-        for($j=0;$j<7;$j++){
-            $table.=`<th scope="col">BOOK</th>`;
-        }
-        $table.=`</tr>`;
-    }
-    $table .= `</tbody></table>`;
-    print_r(getdate());
-    //     <th scope="col">#</th>
-    //     <th scope="col">First</th>
-    //     <th scope="col">Last</th>
-    //     <th scope="col">Handle</th>
-    //     </tr>
-    // </thead>
-    // <tbody>
-    //     <tr>
-    //     <th scope="row">1</th>
-    //     <td>Mark</td>
-    //     <td>Otto</td>
-    //     <td>@mdo</td>
-    //     </tr>
-    //     <tr>
-    //     <th scope="row">2</th>
-    //     <td>Jacob</td>
-    //     <td>Thornton</td>
-    //     <td>@fat</td>
-    //     </tr>
-    //     <tr>
-    //     <th scope="row">3</th>
-    //     <td colspan="2">Larry the Bird</td>
-    //     <td>@twitter</td>
-    //     </tr>
-    // </tbody>
-    // </table>
-    echo $table;
-
-     <!-- <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <?php
-                        for($i=0;$i<7;$i++){
-                            $date = date('d-m-Y D',strtotime("$i day"));
-                            ?>
-                            <th scope="col"><?php $date ?></th>
-                        <?php }?>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                        $slots = array('Slot A','Slot B','Slot C','Slot D');
-                        for($i=0;$i<4;$i++){
-                            echo `<tr><th scope="row">$slots[$i]</th>`;
-                            for($j=0;$j<7;$j++){
-                                echo `<td>Mark</td>`;
-                            }
-                            echo `</tr>`;
-                        }
-                        echo `</tbody></table>`;
-                ?>
-                <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table>
-       </div> -->

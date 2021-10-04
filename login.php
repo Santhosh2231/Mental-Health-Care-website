@@ -15,10 +15,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $login = true;
             session_start();
             $_SESSION['loggedin'] = true;
-            $sql = "select s.no from counsellors where email='$email' AND password='$password'";
+            $sql = "select sno from counsellors where email='$email' AND password='$password'";
             $id = mysqli_query($conn,$sql);
             $_SESSION['id'] = $id;
-            header("location: home.html");
+            header("location: home.php");
 
         } 
         else{
@@ -32,10 +32,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $login = true;
             session_start();
             $_SESSION['loggedin'] = true;
-            $sql = "select s.no from counsellors where email='$email' AND password='$password'";
+            $sql = "select sno from counsellors where email='$email' AND password='$password'";
             $id = mysqli_query($conn,$sql);
             $_SESSION['id'] = $id;
-            header("location: home.html");
+            header("location: home.php");
 
         } 
         else{
@@ -94,8 +94,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
         </div>
     </header>
-    <div class="container col-12 col-sm-3 offset-md-4" style="margin-top: 10px; margin-bottom: 10px;">
-        <div class="card" style="width: 30rem;">
+    <div class="container col-12 col-sm-5" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="card col-12" style="width: 60rem;">
             <div class="card-header">
             <h2 class="text-center">Login</h2> 
             </div>
@@ -176,5 +176,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
      <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
      <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script>
+         <?php
+            if(!$login){
+                ?>swal("Oops...!",<?php $showError ?>,"error");
+            <?php } ?>
+     </script>
 </body>
 </html>
