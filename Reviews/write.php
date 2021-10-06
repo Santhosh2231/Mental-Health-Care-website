@@ -1,52 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
-    <link href="../css/styles.css" rel="stylesheet">
-    <title>Profile</title>
-</head>
-<body>
-    <nav class="navbar navbar-dark navbar-expand-sm bg-primary fixed-top">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- <a class="navbar-brand" href="#"><img src="logoi.png" height="30" width="41"></a> -->
-            <div class="collapse navbar-collapse" id="Navbar">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a class="nav-link" href="home.php"><h5><b>Mental Health Care</b></h5></a> </li>
-                    <li class="nav-item "><a class="nav-link" href="home.php"><span class="fa fa-home"></span> Home </a>
-                    </li>
-                    <li class="nav-item active"><a class="nav-link" href="about.php"><span class="fa fa-info"></span> About
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="menu.php"><span class="fa fa-list fa-ig"></span> Menu </a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="contact.php"><span
-                                class="fa fa-address-card fa-ig"></span> Contact </a></li>
-                    <li class="nav-item"><a class="nav-link" href="signout.php"><i class="fa fa-sign-out"></i> Signout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <header>
-        <div class="jumbotron">
-            <div class="container">
-                <div class="row row-header " style="margin: 10px; padding-bottom: 0%;">
-                    <div class="col-12 col-sm-6">
-                        <h1 id="title">Mental Health care</h1>
-                        <p>Our vision is to ...........<br>
-                            Our mission is to ............</p>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </header>
+<?php
+    include '../connect.php';
+?>
+<?php include '../templates/folheader.html'; ?>
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">
@@ -56,54 +11,73 @@
                 <li class="breadcrumb-item active">Write Reviews</li>
             </ol>
             <div class="col-12">
-               <h3>Book Appointments</h3>
+               <h3> Write Reviews</h3>
                <hr>
+            </div>
+        </div>
+        <div class="container" style="background-color:rgb(255, 252, 245); padding: 10px 10px 10px 10px;">
+            <table class="table table-striped" id="myTable">
+                <thead class="bg-primary text-white">
+                    <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Counsellor Name</th>
+                    <th scope="col" class='text-center'>Write Reviews</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php 
+                    $sql = "SELECT counsellors.cno cno,counsellors.firstname Cname,review.rating rating,counsellor_exper.counsellor_exp expe FROM `counsellors`";
+                    $sql .= "LEFT JOIN review on counsellors.cno=review.counsellorid LEFT JOIN counsellor_exper on counsellors.cno=counsellor_exper.cno;";
+                    $result = mysqli_query($conn, $sql);
+                    $sno = 0;
+                    while($row = mysqli_fetch_assoc($result)){
+                        $sno = $sno + 1;
+                        echo "<tr>
+                        <th class='text-center' scope='row'>". $sno . "</th>
+                        <td > Dr. ". $row['Cname'] . "</td>
+                        <td class='text-center'><button class='btnmodal text-center btn btn-sm btn-primary' id=".$row['cno']." data-id=".$row['cno']." data-toggle='modal' data-target='#exampleModalCenter'>Write Review</button></td>
+                    </tr>";
+                    } 
+                ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                     <div class="form-group">
+                         <label class="control-label">Id: </label>
+                         <input type="text" name="id" id="id" />
+                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                </div>
             </div>
         </div>
 
 
     </div>
-    <footer class="footer ">
-        <div class="container">
-            <div class="row">             
-                <div class="col-4 offset-1 col-sm-2">
-                    <h5>Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="aboutus.html">About</a></li>
-                        <li><a href="#">Menu</a></li>
-                        <li><a href="#" >Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-7 col-sm-5">
-                    <h5>Our website Designers</h5>
-                    <address>
-		              Raminedi Santhosh 20BCE1477<br>
-		              Spandan Ghosh 20BCE1428<br>
-		              Debduhitha Banerjee 20BCE1429<br>
-		           </address>
-                </div>
-                <div class="col-12 col-sm-4 align-self-center">
-                    <div class="text-center">
-                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus"></i></a>
-                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook"></i></a>
-                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin"></i></a>
-                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
-                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube"></i></a>
-                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o"></i></a>
-                    </div>
-                </div>
-           </div>
-           <div class="row justify-content-center">             
-                <div class="col-auto">
-                    <p>© Copyright 2021 Mental Health care</p>
-                </div>
-           </div>
-        </div>
-    </footer>
-     <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
-     <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
-     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
-     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <?php include '../templates/footer.html'; ?>
+     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+            $("#signout").addClass('active');
+            $(".btnmodal").click(function(){
+                var passedID = $(this).data('id');
+                $('input:text').val(passedID);
+            })
+        } );
+    </script>
 </body>
 </html>

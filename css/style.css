@@ -27,13 +27,7 @@ body{
     background: #9575CD;
     color: floralwhite;
 }
-.table{
-    border: 3px solid black;
-    border-collapse: collapse;
-}
-th,td{
-    background-color: #96D4D4;
-}
+
 .card{
     background: #fff;
     border-radius: 16px;
@@ -43,7 +37,6 @@ th,td{
 .navbar-dark {
  background-color: #512DA8;
 }
-
 a:hover{
     text-decoration: none;
     color: hotpink;
