@@ -47,7 +47,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?><?php include 'templates/iniheader.html'; ?>
     <div class="container col-12 col-sm-5" style="margin-top: 10px; margin-bottom: 10px;">
         <div class="card col-12" style="width: 60rem;">
-            <div class="card-header">
+        <br>
+            <div class="card-header bg-primary text-white">
             <h2 class="text-center">Login</h2> 
             </div>
             <div class="card-body">

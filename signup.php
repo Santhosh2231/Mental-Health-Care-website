@@ -56,12 +56,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?><?php include 'templates/iniheader.html'; ?>
     <div class="container col-12 col-sm-6" style="margin-top: 10px; margin-bottom: 10px;">
         <div class="card col-12" style="width: 45rem;">
-            <div class="card-header">
+        <br>
+            <div class="card-header bg-primary text-white">
             <h2 class="text-center">Sign Up</h2> 
             </div>
             <div class="card-body">
                 <div class="container row-content">
                     <form action="" method="post" >
+                        <br>
                         <div class="form-group">
                             <select class="form-control" name="type" id="type"> 
                                 <option value="HelpSeeker">Helpseeker</option>
@@ -72,20 +74,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label for="firstname" id="firstname"><h5>First Name:</h5></input>
-                                    <input name="firstname" id="firstname" class="form-control" required></input>
+                                    <input name="firstname" id="firstname" placeholder="Firstname" class="form-control" required></input>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label for="lastname" id="lastname"><h5>Last Name:</h5></input>
-                                    <input name="lastname" id="lastname" class="form-control" required></input>
+                                    <input name="lastname" id="lastname" placeholder="Lastname" class="form-control" required></input>
                                 </div>
                             </div>
                         </div>
                 
                         <div class="form-group">
                             <label for="email" id="email"><h5>Email:</h5></label>
-                            <input type="email" id="email" name="email" class="form-control"
+                            <input type="email" id="email" name="email" class="form-control" placeholder="ex:abc123@gmail.com"
                             pattern=".+@.+" required>
                         </div>
                         
@@ -93,13 +95,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <div class="col">
                                 <div class="form-group">
                                     <label for="password" id="password"><h5>Password :</h5></input>
-                                    <input type="password" name="password" id="password" class="form-control" required></input>
+                                    <input type="password" name="password" id="password" placeholder="Password" class="form-control" required></input>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="conpassword" id="conpassword"><h5>Confirm Password: </h5></input>
-                                    <input type="password" name="conpassword" id="conpassword" class="form-control" required></input>
+                                    <input type="password" name="conpassword" id="conpassword" placeholder="Confirm password" class="form-control" required></input>
                                 </div>
                             </div>
                         </div>
@@ -108,13 +110,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <div class="col">
                                 <div class="form-group">
                                     <label for="age" id="age"><h5>Age:</h5></input>
-                                    <input type="number" class="form-control" name="age" id="age" min=0 max=200></input>
+                                    <input type="number" class="form-control" placeholder="Age" name="age" id="age" min=0 max=200></input>
                                     </div>
                             </div>
                             <div class="col">
                                     <div class="form-group">
                                     <label for="location" id="location"><h5>Location:</h5></input>
-                                    <input name="location" class="form-control" id="location"></input> 
+                                    <input name="location" class="form-control" placeholder="Location" id="location"></input> 
                                     </div>
                             </div>
                         </div>
