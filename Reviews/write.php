@@ -1,5 +1,8 @@
 <?php
+    session_start();
     include '../connect.php';
+    $conn = OpenCon();
+    $_SESSION['id'] = 1;
 ?>
 <?php include '../templates/folheader.html'; ?>
     <div class="container">
@@ -26,46 +29,22 @@
                 </thead>
                 <tbody>
                 <?php 
-                    $sql = "SELECT counsellors.cno cno,counsellors.firstname Cname,review.rating rating,counsellor_exper.counsellor_exp expe FROM `counsellors`";
-                    $sql .= "LEFT JOIN review on counsellors.cno=review.counsellorid LEFT JOIN counsellor_exper on counsellors.cno=counsellor_exper.cno;";
+                    $sql = "SELECT * FROM `counsellors`;";
                     $result = mysqli_query($conn, $sql);
                     $sno = 0;
                     while($row = mysqli_fetch_assoc($result)){
                         $sno = $sno + 1;
+                        $k = "Dr. ".$row['firstname'];
                         echo "<tr>
                         <th class='text-center' scope='row'>". $sno . "</th>
-                        <td > Dr. ". $row['Cname'] . "</td>
-                        <td class='text-center'><button class='btnmodal text-center btn btn-sm btn-primary' id=".$row['cno']." data-id=".$row['cno']." data-toggle='modal' data-target='#exampleModalCenter'>Write Review</button></td>
+                        <td > ".$k . "</td>
+                        <td class='text-center'><a class='btn btn-success btn-xs' href='rating.php?Cid=".$row['cno']."><button class='text-center btn btn-sm btn-primary>Write Review</button></a></td>
                     </tr>";
                     } 
                 ?>
                 </tbody>
             </table>
         </div>
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                     <div class="form-group">
-                         <label class="control-label">Id: </label>
-                         <input type="text" name="id" id="id" />
-                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-                </div>
-            </div>
-        </div>
-
-
     </div>
     <?php include '../templates/footer.html'; ?>
      <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
@@ -73,10 +52,6 @@
         $(document).ready( function () {
             $('#myTable').DataTable();
             $("#signout").addClass('active');
-            $(".btnmodal").click(function(){
-                var passedID = $(this).data('id');
-                $('input:text').val(passedID);
-            })
         } );
     </script>
 </body>

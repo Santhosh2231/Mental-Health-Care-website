@@ -1,4 +1,9 @@
-<?php include '../templates/folheader.html'; ?>
+<?php 
+    session_start();
+    include 'connect.php';
+    $conn = OpenCon();
+
+?><?php include '../templates/folheader.html'; ?>
         <div class="jumbotron">
             <div class="container">
                 <div class="row row-header " style="margin: 10px; padding-bottom: 0%;">

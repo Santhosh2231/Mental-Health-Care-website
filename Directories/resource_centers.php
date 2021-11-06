@@ -1,18 +1,29 @@
-<?php include '../templates/folheader.html'; ?>
-        <div class="jumbotron">
-            <div class="container">
-                <div class="row row-header " style="margin: 10px; padding-bottom: 0%;">
-                    <div class="col-12 col-sm-6">
-                        <h1 id="title">Mental Health care</h1>
-                        <p>Our vision is to ...........<br>
-                            Our mission is to ............</p>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </header>
-    <div class="container">
+<?php
+	
+    include '../connect.php';
+    session_start();
+	$conn = OpenCon();
+
+	// get and display all resource centre information
+	function showResourceCentres() {
+
+		global $conn;  
+		$sql = "SELECT * FROM ResourceCentre";
+		$result = $conn->query($sql);
+
+		while($row = $result->fetch_assoc()) { 
+			echo "<tr>
+					<td>".$row["centreID"]."</td>
+					<td>".$row["centreName"]."</td>
+					<td>".$row["address"]."</td>
+					<td>".$row["email"]."</td>
+					<td>".$row["postalCode"]."</td>
+					<td>".$row["phoneNum"]."</td>
+				  </tr>";
+		}
+	}
+?><?php include '../templates/folheader.html'; ?>
+    <div class="container mb-5">
         <div class="row">
             <ol class="col-12 breadcrumb">
                 <li class="breadcrumb-item"><a href="../home.php">Home</a></li>
@@ -25,9 +36,36 @@
                <hr>
             </div>
         </div>
+        <div class="container">
+            <div class="card">
+                <h2 class="card-header text-white bg-primary text-center">Resource Centre Directory</h2>
+                <div class="card-body">
+                    <table class="table table-striped" id="myTable">
+                        <thead class="bg-success text-white">
+                            <tr>
+                                
+                                <th scope="col">Centre ID</th>
+                                <th scope="col">Centre Name</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Postal Code</th>
+                                <th scope="col">Phone</th>
+                            </tr>
+                        </thead>
+                        <?php showResourceCentres()?>
+                    </table>
+                </div>
+            </div>
+        </div>
 
 
     </div>
     <?php include '../templates/footer.html'; ?>
+    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>
 </body>
 </html>

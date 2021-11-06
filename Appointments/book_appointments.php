@@ -1,5 +1,8 @@
 <?php
+    session_start();
     include '../connect.php';
+    $conn = OpenCon();
+    // session_start();
 
 
 

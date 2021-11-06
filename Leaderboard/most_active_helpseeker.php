@@ -1,4 +1,9 @@
-<?php include '../templates/folheader.html'; ?>
+<?php 
+    session_start();
+    include 'connect.php';
+    $conn = OpenCon();
+
+?><?php include '../templates/folheader.html'; ?>
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">
