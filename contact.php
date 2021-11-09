@@ -22,7 +22,7 @@
                <h3>Send us your Feedback</h3>
                <br>
             </div>
-             <div class="col-12 col-md-9">
+             <div class="col-12 col-md-9 offset-md-1">
                  <form>
                      <div class="form-group row">
                          <label for="firstname" class="col-md-2 col-form-label">First Name</label>

@@ -22,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $sql = "select s.no from admin where email='$email' AND password='$password'";
             $id = mysqli_query($conn,$sql);
             $_SESSION['id'] = $id;
-            header("location: home.html");
+            header("location: Admin/home.html");
         }
         else{
             $showError = "Invalid Security Password";
@@ -66,9 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                         <br>
-                        <div class="text-center">
-                            <h5>New user? <a href="./signup.html">signup</a></h5>
-                        </div>
+                        
                     </form>
                 </div>
             </body>

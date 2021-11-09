@@ -33,8 +33,8 @@
                 </thead>
                 <tbody>
                 <?php 
-                    $sql = "SELECT counsellors.cno cno,counsellors.firstname Cname,review.rating rating,counsellor_exper.counsellor_exp expe FROM `counsellors`";
-                    $sql .= "LEFT JOIN review on counsellors.cno=review.counsellorid LEFT JOIN counsellor_exper on counsellors.cno=counsellor_exper.cno;";
+                    $sql = "SELECT counsellors.cno cno,counsellors.firstname Cname,ROUND(AVG(review.rating),1) rating,counsellor_exper.counsellor_exp expe FROM `counsellors`";
+                    $sql .= "LEFT JOIN review on counsellors.cno=review.counsellorid LEFT JOIN counsellor_exper on counsellors.cno=counsellor_exper.cno GROUP BY counsellors.cno;";
                     $result = mysqli_query($conn, $sql);
                     $sno = 0;
                     while($row = mysqli_fetch_assoc($result)){

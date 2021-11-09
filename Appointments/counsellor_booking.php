@@ -3,11 +3,14 @@
     $_SESSION['Cid'] = $_GET['counsellorid'];
     $_SESSION['id'] = 1;
     include '../connect.php';
+    $conn = OpenCon();
     function build_calendar(){
+        global $conn;
+        $conid = $_GET['counsellorid'];
         $daysOfWeek = array();
         $datesget = array();
         $dayinweek = array();
-        for($i=0;$i<7;$i++){
+        for($i=1;$i<8;$i++){
             $date = date('d-m-Y',strtotime("$i day"));
             $dates = date('Y-m-d',strtotime("$i day"));
             array_push($daysOfWeek,$date);
@@ -27,11 +30,20 @@
         $slot = array(1,2,3,4,5);
        $j=0;
         $slots = array('Slot A :9:30 A.M to 10:30 A.M','Slot B : 9:30 A.M to 10:30 A.M','Slot C : 9:30 A.M to 10:30 A.M','Slot D : 9:30 A.M to 10:30 A.M','Slot E : 9:30 A.M to 10:30 A.M');
-       foreach($slots as $sl){
-            $calendar .= "<th scope='row' class='text-center'>$sl</th>";
+       for($p=0;$p<5;$p++){
+            $calendar .= "<th scope='row' class='text-center'>$slots[$p]</th>";
             for($i=0;$i<7;$i++){
-                $calendar .= "<td class='text-center  align-middle'><a class='btn btn-success btn-xs' href='confirmation.php?cid=".$_GET['counsellorid']."&date=$datesget[$i]&slotid=".$slot[$j]."<form action='counsellor_booking.php' method='get' >Book</form></a></td>";
-
+                $key = $p+1;
+                $sql = "SELECT * FROM `booking` WHERE `booking`.`counsellorid`='$conid' and `booking`.`date`= '$datesget[$i]' and `booking`.`slotno`='$key'";
+                $result = $conn->query($sql);
+                $num = mysqli_num_rows($result);
+                if ($num>0){
+                    $calendar .= "<td class='text-center  align-middle'><button class='btn btn-sm btn-danger btn-xs' data-toggle='modal' data-target='#bookedslot'><h6>Booked</h6></button></td>";
+                }
+                else{
+                    $calendar .= "<td class='text-center  align-middle'><a class='btn btn-success btn-xs' href='confirmation.php?cid=".$_GET['counsellorid']."&date=$datesget[$i]&slotid=".$slot[$j]."<form action='counsellor_booking.php' method='get' >Book</form></a></td>";
+                }
+            
             }
             $j++;
             $calendar .= "</tr>";
@@ -42,6 +54,26 @@
     }
 
 ?><?php include '../templates/folheader.html'; ?>
+    <div class="modal fade" id="bookedslot" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Slot already Booked</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Sorry for the inconvienence!!!</p>
+            <p>This Slot is already booked by another User.</p>
+            <p>Please Choose another available date and slot!!!</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+        </div>
+        </div>
+    </div>
+    </div>
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">

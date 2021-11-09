@@ -1,4 +1,9 @@
-<?php include 'templates/header.html'; ?>
+<?php 
+    session_start();
+    include '../connect.php';
+    $conn = OpenCon();
+
+?><?php include '../templates/folheader.html'; ?>
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">
@@ -27,8 +32,7 @@
                         <div class="card-body col-12 col-md-8 offset-md-2 text-center">
                             <div class="card col-12 " style="width: 30rem;">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a href="Appointments/book_appointments.php"><h4>Book Appointments</h4></a></li>
-                                    <li class="list-group-item"><a href="Appointments/view_appointments.php"><h4>View Appointments</h4></a></li>
+                                    <li class="list-group-item"><a href="view_appointments.php"><h4>View Appointments</h4></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -48,8 +52,7 @@
                         <div class="card-body col-12 col-md-8 offset-md-2 text-center">
                             <div class="card col-12" style="width: 30rem;">
                                 <ul class="list-group list-group-flush">
-                                  <li class="list-group-item"><a href="Reviews/view.php"><h4>View Reviews</h4></a></li>
-                                  <li class="list-group-item"><a href="Reviews/write.php"><h4>Write Reviews</h4></a></li>
+                                  <li class="list-group-item"><a href="view_reviews.php"><h4>View Reviews</h4></a></li>
                                   
                                 </ul>
                             </div>
@@ -70,10 +73,10 @@
                         <div class="card-body col-12 col-md-8 offset-md-2 text-center">
                             <div class="card col-12" style="width: 30rem;">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a href="Directories/users.php"><h4>Users</h4></a></li>
-                                    <li class="list-group-item"><a href="Directories/Hotlines.php"><h4>Hotlines</h4></a></li>
-                                    <li class="list-group-item"><a href="Directories/resource_centers.php"><h4>Resource Centers</h4></a></li>
-                                    <li class="list-group-item"><a href="Directories/types_of_help.php"><h4>Type of Helps</h4></a></li>
+                                    <li class="list-group-item"><a href="users.php"><h4>Users</h4></a></li>
+                                    <li class="list-group-item"><a href="Hotlines.php"><h4>Hotlines</h4></a></li>
+                                    <li class="list-group-item"><a href="resource_centers.php"><h4>Resource Centers</h4></a></li>
+                                    <li class="list-group-item"><a href="types_of_help.php"><h4>Type of Helps</h4></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -92,8 +95,9 @@
                         <div class="card-body col-12 col-md-8 offset-md-2 text-center">
                             <div class="card col-12" style="width: 30rem;">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a href="Leaderboard/topcounsellor.php"><h4>Top Counsellor</h4></a></li>
-                                    <li class="list-group-item"><a href="Leaderboard/most_activecounsellor.php"><h4>Most Active Counsellor</h4></a></li>
+                                    <li class="list-group-item"><a href="../Leaderboard/topcounsellor.php"><h4>Top Counsellor</h4></a></li>
+                                    <li class="list-group-item"><a href="../Leaderboard/most_activecounsellor.php"><h4>Most Active Counsellor</h4></a></li>
+                                    <li class="list-group-item"><a href="../Leaderboard/most_active_helpseeker.php"><h4>Most Active Helpseeker</h4></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -124,6 +128,6 @@
         </div>
     </div>
     <br>
-    <?php include 'templates/footer.html'; ?>
+    <?php include '../templates/footer.html'; ?>
 </body>
 </html>

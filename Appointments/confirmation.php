@@ -2,18 +2,9 @@
     session_start();
     include '../connect.php';
     $conn = OpenCon();
-    if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        global $conn;
-        $Cid = $_GET['cid'];
-        $Hid = $_SESSION['id'];
-        $date = $_GET["date"];
-        $slot = $_GET["slotid"];
-        $type = $_POST["pay"];
-        $sql = "INSERT INTO `booking`(`bookingid`, `counsellorid`, `helpseekerid`, `date`, `slotno`, `PaymentType`) VALUES ('NULL','$Cid','$Hid','$date','$slot','$type')";
-        $result = $conn->query($sql);
-    }
     function counsellorname(){
         global $conn;
+    
         $k = $_GET['cid'];
         $sql = "select firstname from `counsellors` where cno = '$k'";
         $result = $conn->query($sql);
@@ -36,11 +27,13 @@
     }
     function coundate(){
         $date = $_GET['date'];
+        $_SESSION['date'] = $date;
         echo "<h3>".$date."</h3>";
     }
     function slottiming(){
         global $conn;
         $slot = $_GET['slotid'];
+        $_SESSION['slotid'] = $slot;
         $sql = "SELECT `timefrom`, `timeto` FROM `slot` WHERE slotid='$slot'";
         $result = $conn->query($sql);
         // if($result->num_rows==1){
@@ -68,7 +61,7 @@
         <div class="container mb-5">
             <div class="card col-12 col-sm-8 offset-sm-2">
                 <h3 class="card-header text-white bg-primary text-center">Confirmation</h3>
-                <form action="" method="post">
+                <form action="view_appointments.php" method="post">
                     <div class="form-group">
                         <div class="card col-12">
                             <ul class="list-group list-group-flush table-stripped mt-2">
@@ -130,6 +123,8 @@
                                     </div>
                                 
                                 </li>
+                                <input type="hidden" name="slotid" id="slotid">
+                                <input type="hidden" name="date" id="date">
                                 <li class="list-group-item text-center">
                                     <button type="submit" class="btn btn-primary text-center" name=""><h4>Confirm Booking</h4></button>
                                 </li>
@@ -141,6 +136,21 @@
         </div>
     </div>
 <?php include '../templates/footer.html'; ?>
+<script>
+    function substringchar(k,'<'){
+        var i =0;
+        while (k[i]!='<') {
+            i++
+        }
+        return k.substring(0,i);
+    }
+    var k = <?php echo json_encode($_GET['slotid']); ?>;
+    k = k.substring(0,1);
+    slotid.value = k;
+    var k = <?php echo json_encode($_GET['date']); ?>;
+    date.value = k;
+</script>
+    
     <script>
         function goBack(){
             window.history.back();
