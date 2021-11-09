@@ -1,4 +1,9 @@
-<?php include 'templates/header.html'; ?>
+<?php 
+    session_start(); 
+    include 'templates/header.html';
+    include 'connect.php';
+    
+?>
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">

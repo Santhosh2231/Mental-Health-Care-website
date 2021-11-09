@@ -2,10 +2,13 @@
     session_start();
     include '../connect.php';
     $conn = OpenCon();
+    if(!isset($_SESSION['Cid']) || !$_GET['date'] || !$_GET['slotid']){
+        header("location: book_appointments.php");
+    }
     function counsellorname(){
         global $conn;
     
-        $k = $_GET['cid'];
+        $k = $_SESSION['Cid'];
         $sql = "select firstname from `counsellors` where cno = '$k'";
         $result = $conn->query($sql);
         // if($result->num_rows==1){

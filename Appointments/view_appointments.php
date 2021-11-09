@@ -1,7 +1,12 @@
 <?php 
     session_start();
     include '../connect.php';
+    include '../templates/folheader.html';
     $conn = OpenCon();
+    if(!isset($_SESSION['id'])){
+        header("location: ../login.php");
+    }
+    $id = $_SESSION['id'];
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
         global $conn;
         $Cid = $_SESSION['Cid'];
@@ -9,16 +14,27 @@
         $date = $_SESSION["date"];
         $slot = $_SESSION["slotid"];
         $type = $_POST["pay"];
-        echo  
         $sql = "INSERT INTO `booking`(`bookingid`, `counsellorid`, `helpseekerid`, `date`, `slotno`, `PaymentType`) VALUES ('NULL','$Cid','$Hid','$date','$slot','$type')";
         $result = $conn->query($sql);
-        
+        if($result){
+            $alert="<script>
+            Swal.fire({
+            title: 'Booking successfully Done!',
+            icon: 'success',
+            button: 'OK',
+            });
+            </script>";
+            echo $alert;
+            unset($_SESSION['Cid']);
+            unset($_SESSION['date']);
+            unset($_SESSION['slotid']);
+        }    
     }
     function upcoming(){
-        global $conn;
+        global $conn,$id;
         $todaydate = date("Y-m-d");
     
-        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`helpseekerid`=1";
+        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`helpseekerid`='$id'";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) { 
             if ($todaydate <= $row['date']){
@@ -33,10 +49,10 @@
 		}
     }
     function today(){
-        global $conn;
+        global $conn,$id;
         $todaydate = date("Y-m-d");
     
-        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`counsellorid`=6 and `booking`.`helpseekerid`=1";
+        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`helpseekerid`='$id'";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) { 
             if ($todaydate == $row['date']){
@@ -51,7 +67,7 @@
 		}
     }
     function previous(){
-        global $conn;
+        global $conn,$id;
         $todaydate = date("Y-m-d");
     
         $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`counsellorid`=6 and `booking`.`helpseekerid`=1";
@@ -69,7 +85,7 @@
 		}
     }
 
-?><?php include '../templates/folheader.html'; ?>
+?>
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">

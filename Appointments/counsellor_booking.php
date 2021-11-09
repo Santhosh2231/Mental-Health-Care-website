@@ -1,7 +1,6 @@
 <?php
     session_start();
     $_SESSION['Cid'] = $_GET['counsellorid'];
-    $_SESSION['id'] = 1;
     include '../connect.php';
     $conn = OpenCon();
     function build_calendar(){
@@ -41,7 +40,7 @@
                     $calendar .= "<td class='text-center  align-middle'><button class='btn btn-sm btn-danger btn-xs' data-toggle='modal' data-target='#bookedslot'><h6>Booked</h6></button></td>";
                 }
                 else{
-                    $calendar .= "<td class='text-center  align-middle'><a class='btn btn-success btn-xs' href='confirmation.php?cid=".$_GET['counsellorid']."&date=$datesget[$i]&slotid=".$slot[$j]."<form action='counsellor_booking.php' method='get' >Book</form></a></td>";
+                    $calendar .= "<td class='text-center  align-middle'><a class='btn btn-success btn-xs' href='confirmation.php?date=$datesget[$i]&slotid=".$slot[$j]."<form action='counsellor_booking.php' method='get' >Book</form></a></td>";
                 }
             
             }
@@ -90,8 +89,7 @@
         </div>
        <div class="container">
             <?php 
-                echo build_calendar();  
-                echo $_GET['counsellorid'];       
+                echo build_calendar();        
             ?> 
        </div> 
         <br>

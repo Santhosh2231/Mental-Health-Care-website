@@ -2,14 +2,7 @@
     session_start();
     include '../connect.php';
     $conn = OpenCon();
-    if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        $k = $_GET['Cid'];
-        $aid = $_SESSION['id'];
-        $rating = $_POST["rating"];
-        $feedback = $_POST["feedback"];
-        $sql = "INSERT INTO `review`(`reviewid`, `authorid`, `counsellorid`, `rating`, `feedback`) VALUES ('NULL','$aid','$k','$rating','$feedback')";
-        $result = $conn->query($sql);
-    }
+    $_SESSION['Cid'] = $_GET['Cid'];
     function counsellorname(){
         global $conn;
         $k = $_GET['Cid'];
@@ -40,7 +33,7 @@
             <div class="card col-sm-8 offset-sm-2">
                 <h2 class="card-header text-white bg-primary text-center">Review </h2>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="view.php" method="post">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-6">

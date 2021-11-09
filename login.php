@@ -1,4 +1,5 @@
-<?php
+<?php 
+include 'templates/iniheader.html';
 $login = false;
 $showError = false;
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -15,15 +16,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if ($num > 0){
             $login = true;
             session_start();
-            $_SESSION['loggedin'] = true;
-            $sql = "select sno from counsellors where email='$email' AND password='$password'";
-            $id = mysqli_query($conn,$sql);
+            $_SESSION['Loggedin'] = true;
+            $sql = "select cno from counsellors where email='$email' AND password='$password'";
+            $result = mysqli_query($conn,$sql);
+            while($row = $result->fetch_assoc()) { 
+                $id = $row['cno'];
+            }
+            echo $id;
             $_SESSION['id'] = $id;
             header("location: home.php");
 
         } 
         else{
-            $showError = "Invalid Credentials";
+            $showError = "<script>
+            Swal.fire({
+            title: 'Good Job!',
+            text: 'LoggedIn successfully!',
+            icon: 'success',
+            button: 'OK',
+            });
+            </script>";
+            echo $showError;
         }
     }else{
         $sql = "Select * from users where email='$email' AND password='$password'";
@@ -32,20 +45,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if ($num > 0){
             $login = true;
             session_start();
-            $_SESSION['loggedin'] = true;
-            $sql = "select sno from counsellors where email='$email' AND password='$password'";
-            $id = mysqli_query($conn,$sql);
+            $_SESSION['Loggedin'] = true;
+            $sql = "SELECT `users`.`sno` `sno` FROM `users` WHERE users.email='$email' AND `users`.`password`='$password'";
+            $result = mysqli_query($conn,$sql);
+            while($row = $result->fetch_assoc()) { 
+                $id = $row['sno'];
+            }
+        
             $_SESSION['id'] = $id;
             header("location: home.php");
 
         } 
         else{
-            $showError = "Invalid Credentials";
+            $showError = "<script>
+            Swal.fire({
+            title: 'Invalid Login!!',
+            text: 'Please enter valid credentials !',
+            icon: 'error',
+            button: 'OK',
+            });
+            </script>";
+            echo $showError;
         }
     }
 }
 
-?><?php include 'templates/iniheader.html'; ?>
+?>
     <div class="container col-12 col-sm-5" style="margin-top: 10px; margin-bottom: 10px;">
         <div class="card col-12" style="width: 60rem;">
         <br>

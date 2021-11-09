@@ -1,9 +1,10 @@
 <?php
+include 'templates/iniheader.html';
 $showAlert = false;
 $showError = false;
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     include 'connect.php';
-
+    $conn = OpenCon();
 
     $type = $_POST["type"];
     $firstname = $_POST["firstname"];
@@ -30,9 +31,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $sql = "INSERT INTO `counsellor_exper` (`cno`, `counsellor_exp`, `cerfication`) VALUES ('$id', '$yearsExp', '$cert');";
                 $showAlert = true;
                 $result = mysqli_query($conn,$sql);
+
+                $success = "<script>
+                Swal.fire({
+                title: 'Registered Succesfully!!',
+                text: 'Now please login into website!',
+                icon: 'success',
+                button: 'OK',
+                });
+                </script>";
+                echo $success;
                 
-                header("location: home.php");
+                header("location: login.php");
                 
+            }
+            else{
+                $showError = "<script>
+                Swal.fire({
+                title: 'Registration unsuccessful!',
+                text: 'please retry by providing details!',
+                icon: 'error',
+                button: 'OK',
+                });
+                </script>";
+                echo $showError;
             }
         }
         else{
@@ -45,15 +67,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $sql = "insert into userdata (sno, noofcounsellings, noofreviews) values ($id, 0, 0);";
                 $result = $conn->query($sql);
                 $showAlert = true;
-                header("location: home.php");
+                header("location: login.php");
+            }
+            else{
+                $showError = "<script>
+                Swal.fire({
+                title: 'Registration unsuccessful!',
+                text: 'please retry by providing details!',
+                icon: 'error',
+                button: 'OK',
+                });
+                </script>";
+                echo $showError;
             }
         }
     }
     else{
-        $showError = "Passwords do not match";
+        $showError = "<script>
+                Swal.fire({
+                title: 'Registration unsuccessful!',
+                text: 'Make sure that passwords are same!',
+                icon: 'error',
+                button: 'OK',
+                });
+                </script>";
+        echo $showError;
     }
 }
-?><?php include 'templates/iniheader.html'; ?>
+?>
     <div class="container col-12 col-sm-6" style="margin-top: 10px; margin-bottom: 10px;">
         <div class="card col-12" style="width: 45rem;">
         <br>
