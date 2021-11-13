@@ -1,75 +1,22 @@
 <?php 
     session_start();
     include '../connect.php';
-    include '../templates/folheader.html';
+    include 'header.html';
     $conn = OpenCon();
     if(!isset($_SESSION['id'])){
         header("location: ../login.php");
     }
     $id = $_SESSION['id'];
-    if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        global $conn;
-        $Cid = $_SESSION['Cid'];
-        $Hid = $_SESSION['id'];
-        $date = $_SESSION["date"];
-        $slot = $_SESSION["slotid"];
-        $type = $_POST["pay"];
-        include('config.php');
-        include('api.php');
-        if($slot==1){
-            $date = $date." "."09:30:00";
-        }
-        else if (slot==2){
-            $date = $date." "."09:30:00";
-        }
-        else if (slot==2){
-            $date = $date." "."09:30:00";
-        }
-        else if (slot==2){
-            $date = $date." "."09:30:00";
-        }
-        else if (slot==2){
-            $date = $date." "."09:30:00";
-        }
-        $arr['start_date']= date($date);
-        $arr['duration']=60;
-        $arr['password']='mental';
-        $arr['type']='2';
-
-        $result = createMeeting($arr);
-        if(isset($result->id)){
-            $link = $result->join_url;
-        }else{
-            echo '<pre>';
-            print_r($result);
-        }
-        $sql = "INSERT INTO `booking`(`bookingid`, `counsellorid`, `helpseekerid`, `date`, `slotno`, `PaymentType`,`link`) VALUES ('NULL','$Cid','$Hid','$date','$slot','$type','$link')";
-        $result = $conn->query($sql);
-        if($result){
-            $alert="<script>
-            Swal.fire({
-            title: 'Booking successfully Done!',
-            icon: 'success',
-            button: 'OK',
-            });
-            </script>";
-            echo $alert;
-        }
-        unset($_SESSION['Cid']);
-        unset($_SESSION['date']);
-        unset($_SESSION['slotid']);
-        
-    }
     function upcoming(){
         global $conn,$id;
         $todaydate = date("Y-m-d");
     
-        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`helpseekerid`='$id'";
+        $sql = "SELECT `users`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `users` ON `booking`.`helpseekerid`=`users`.`sno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`counsellorid`='$id'";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) { 
             if ($todaydate <= $row['date']){
                 echo "<tr class='text-center'>
-                        <td>Dr. ".$row["cno"]."</td>
+                        <td>".$row["cno"]."</td>
                         <td>".$row["date"]."</td>
                         <td>".$row["slotid"]."</td>
                         <td>".$row["from"]."</td>
@@ -82,17 +29,16 @@
         global $conn,$id;
         $todaydate = date("Y-m-d");
     
-        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`link` `link`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`helpseekerid`='$id'";
+        $sql = "SELECT `users`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `users` ON `booking`.`helpseekerid`=`users`.`sno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`counsellorid`='$id'";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) { 
             if ($todaydate == $row['date']){
                 echo "<tr class='text-center'>
-                        <td>Dr. ".$row["cno"]."</td>
+                        <td>".$row["cno"]."</td>
                         <td>".$row["date"]."</td>
                         <td>".$row["slotid"]."</td>
                         <td>".$row["from"]."</td>
                         <td>".$row["to"]."</td>
-                        <td><b><a href=".$row['link'].">Join meet</a></b></td>
                     </tr>";
             }
 		}
@@ -101,12 +47,12 @@
         global $conn,$id;
         $todaydate = date("Y-m-d");
     
-        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`counsellorid`=6 and `booking`.`helpseekerid`=1";
+        $sql = "SELECT `users`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `users` ON `booking`.`helpseekerid`=`users`.`sno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`counsellorid`=$id";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) { 
             if ($todaydate > $row['date']){
                 echo "<tr class='text-center'>
-                        <td>Dr. ".$row["cno"]."</td>
+                        <td>".$row["cno"]."</td>
                         <td>".$row["date"]."</td>
                         <td>".$row["slotid"]."</td>
                         <td>".$row["from"]."</td>
@@ -120,9 +66,9 @@
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">
-                <li class="breadcrumb-item"><a href="../home.php">Home</a></li>
-                <li class="breadcrumb-item"><a href="../menu.php">Menu</a></li>
-                <li class="breadcrumb-item"><a href="../menu.php">Appointments</a></li>
+                <li class="breadcrumb-item"><a href="home.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="menu.php">Menu</a></li>
+                <li class="breadcrumb-item"><a href="menu.php">Appointments</a></li>
                 <li class="breadcrumb-item active">View Appointments</li>
             </ol>
             <div class="col-12">
@@ -142,7 +88,6 @@
                                 <th scope="col"><h5>Slot Id</h5></th>
                                 <th scope="col"><h5>Time from</h5></th>
                                 <th scope="col"><h5>Time to</h5></th>
-                                <th scope="col"><h5>Meeting Link</h5></th>
                             </tr>
                         </thead>
                         <?php today(); ?>

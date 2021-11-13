@@ -1,9 +1,13 @@
 <?php 
     session_start();
     include '../connect.php';
+    include 'header.html';
     $conn = OpenCon();
+    if(!isset($_SESSION['Loggedin']) || $_SESSION['Loggedin']!==true || !isset($_SESSION['id'])){
+        header("location: ../login.php");
+    }
 
-?><?php include '../templates/folheader.html'; ?>
+?>
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">
@@ -32,6 +36,7 @@
                         <div class="card-body col-12 col-md-8 offset-md-2 text-center">
                             <div class="card col-12 " style="width: 30rem;">
                                 <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a href="schedule.php"><h4>Schedule a meeting</h4></a></li>
                                     <li class="list-group-item"><a href="view_appointments.php"><h4>View Appointments</h4></a></li>
                                 </ul>
                             </div>
@@ -53,7 +58,6 @@
                             <div class="card col-12" style="width: 30rem;">
                                 <ul class="list-group list-group-flush">
                                   <li class="list-group-item"><a href="view_reviews.php"><h4>View Reviews</h4></a></li>
-                                  
                                 </ul>
                             </div>
                         </div>
@@ -95,9 +99,8 @@
                         <div class="card-body col-12 col-md-8 offset-md-2 text-center">
                             <div class="card col-12" style="width: 30rem;">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a href="../Leaderboard/topcounsellor.php"><h4>Top Counsellor</h4></a></li>
-                                    <li class="list-group-item"><a href="../Leaderboard/most_activecounsellor.php"><h4>Most Active Counsellor</h4></a></li>
-                                    <li class="list-group-item"><a href="../Leaderboard/most_active_helpseeker.php"><h4>Most Active Helpseeker</h4></a></li>
+                                    <li class="list-group-item"><a href="topcounsellor.php"><h4>Top Counsellor</h4></a></li>
+                                    <li class="list-group-item"><a href="most_active.php"><h4>Most Active Counsellor</h4></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -115,8 +118,7 @@
                         <div class="card-body col-12 col-md-8 offset-md-2 text-center">
                             <div class="card col-12" style="width: 30rem;">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a href="lookup.php"><h4>Lookup</h4></a></li>
-                                    
+                                    <li class="list-group-item"><a href="counsellor.php"><h4>Counsellors list</h4></a></li>
                                 </ul>
                             </div>
                         </div>

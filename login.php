@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
             echo $id;
             $_SESSION['id'] = $id;
-            header("location: home.php");
+            header("location: counsellor/home.php");
 
         } 
         else{

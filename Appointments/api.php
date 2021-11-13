@@ -25,7 +25,7 @@ function createMeeting($data = array())
         }
     }
 
-    $createMeetingArr['topic'] = $data['topic'];
+    $createMeetingArr['topic'] = "Mental Health Care Counselling";
     $createMeetingArr['agenda'] = !empty($data['agenda']) ? $data['agenda'] : "";
     $createMeetingArr['type'] = !empty($data['type']) ? $data['type'] : 2; //Scheduled
     $createMeetingArr['start_time'] = $start_time;

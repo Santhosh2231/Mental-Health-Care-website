@@ -9,7 +9,7 @@
         $daysOfWeek = array();
         $datesget = array();
         $dayinweek = array();
-        for($i=1;$i<8;$i++){
+        for($i=2;$i<9;$i++){
             $date = date('d-m-Y',strtotime("$i day"));
             $dates = date('Y-m-d',strtotime("$i day"));
             array_push($daysOfWeek,$date);

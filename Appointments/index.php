@@ -1,12 +1,14 @@
 <?php
 include('config.php');
 include('api.php');
-$arr['topic']='Test by Vishal';
-$arr['start_date']=date('2021-05-16 00:19:35');
-$arr['duration']=30;
-$arr['password']='vishal';
+
+// $arr['topic']='Appointment';
+$arr['start_date']= date('2021-05-16 00:19:35');
+$arr['duration']=60;
+$arr['password']='santhosh';
 $arr['type']='2';
-$result=createMeeting($arr);
+
+$result = createMeeting($arr);
 if(isset($result->id)){
 	echo "Join URL: <a href='".$result->join_url."'>".$result->join_url."</a><br/>";
 	echo "Password: ".$result->password."<br/>";
@@ -16,4 +18,5 @@ if(isset($result->id)){
 	echo '<pre>';
 	print_r($result);
 }
+
 ?>

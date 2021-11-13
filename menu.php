@@ -2,6 +2,9 @@
     session_start(); 
     include 'templates/header.html';
     include 'connect.php';
+    if(!isset($_SESSION['Loggedin']) || $_SESSION['Loggedin']!==true || !isset($_SESSION['id'])){
+        header("location: login.php");
+    }
     
 ?>
     <div class="container">

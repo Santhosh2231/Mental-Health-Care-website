@@ -1,10 +1,10 @@
 <?php 
     session_start();
-    include 'connect.php';
-    include 'templates/header.html';
+    include '../connect.php';
+    include 'header.html';
     $conn = OpenCon();
     if(!isset($_SESSION['Loggedin']) || $_SESSION['Loggedin']!==true || !isset($_SESSION['id'])){
-        header("location: login.php");
+        header("location: ../login.php");
     }
     else{
         $alert="<script>
@@ -16,12 +16,12 @@
         });
         </script>";
         echo $alert;
-        // unset($_SESSION['Loggedin']);
     }
     echo "variable";
     echo $_SESSION['id'];
 ?>
 
-    <?php include 'templates/footer.html'; ?>
+
+    <?php include '../templates/footer.html'; ?>
 </body>
 </html>
