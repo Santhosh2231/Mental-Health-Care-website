@@ -25,9 +25,9 @@
     <div class="container mb-5">
         <div class="row">
             <ol class="col-12 breadcrumb">
-                <li class="breadcrumb-item"><a href="../home.php">Home</a></li>
-                <li class="breadcrumb-item"><a href="../menu.php">Menu</a></li>
-                <li class="breadcrumb-item"><a href="../menu.php">Directories</a></li>
+                <li class="breadcrumb-item"><a href="home.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="menu.php">Menu</a></li>
+                <li class="breadcrumb-item"><a href="menu.php">Directories</a></li>
                 <li class="breadcrumb-item active">Hotlines</li>
             </ol>
             <div class="col-12">

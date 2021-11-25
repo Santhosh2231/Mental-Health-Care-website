@@ -1,7 +1,9 @@
 <?php
     include '../connect.php';
 	$conn = OpenCon();
-
+    if(!isset($_SESSION['Loggedin']) || $_SESSION['Loggedin']!==true || !isset($_SESSION['id'])){
+        header("location: ../admin.php");
+    }
 	// Display information of all hotlines
 	function showTypesOfHelp() {
 
@@ -23,7 +25,7 @@
 	}
 
 
-?><?php include '../templates/folheader.html'; ?>
+?><?php include 'header.html'; ?>
     <div class="container mb-5">
         <div class="row">
             <ol class="col-12 breadcrumb">

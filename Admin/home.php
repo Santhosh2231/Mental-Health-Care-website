@@ -1,11 +1,11 @@
 <?php 
     session_start();
-    include 'connect.php';
-    include 'templates/header.html';
+    include '../connect.php';
+    include 'header.html';
     $conn = OpenCon();
     
     if(!isset($_SESSION['Loggedin']) || $_SESSION['Loggedin']!==true || !isset($_SESSION['id'])){
-        header("location: login.php");
+        header("location: ../admin.php");
     }
     else{
         if($_SESSION['times']==1){
@@ -20,20 +20,16 @@
             echo $alert;
             $_SESSION['times'] = 0;
         }
-        // unset($_SESSION['Loggedin']);
+        
     }
     function showProfilePicture() {
-
-		if($_SESSION["usertype"] == "HelpSeeker") {
-			echo "<img src='../mental-health-care/Images/helpseeker-pfp.png' class='img-fluid img-max'>";
-		} else {
-			echo "<img src='../mental-health-care/Images/counsellor-pfp.png' class='img-fluid img-max'>";
-		}
+        echo "<img src='../Images/counsellor-pfp.png' class='img-fluid img-max'>";
+		
 	}
     function showBasicInfo(){
         global $conn;
         $id = $_SESSION['id'];
-        $sql = "SELECT * FROM `users` WHERE `users`.`sno`=$id";
+        $sql = "SELECT * FROM `admin` WHERE `admin`.`ano`=$id";
         $result = mysqli_query($conn,$sql);
         $row = $result->fetch_assoc();
 
@@ -64,9 +60,7 @@
                     </div>
                     <div class ="col">
                         <?php showBasicInfo() ?>
-                        <a href="editprofile.php" class="btn btn-success mr-2">Edit Profile</a>
-                        <a href="delprofile.php" class="btn btn-danger">Delete Account</a>
-
+                        <a href="editprofile.php" class="btn btn-success text-white mr-2">Edit Profile</a>
                         <form action = 'signout.php' method='POST'>
                             <button name='logoutSubmit' type='submit' class='btn btn-primary mt-2'>Logout</button>
                         </form>
@@ -77,7 +71,7 @@
     </div>
 
 
-    <?php include 'templates/footer.html'; ?>
+    <?php include '../templates/footer.html'; ?>
     <script>
         
     </script>

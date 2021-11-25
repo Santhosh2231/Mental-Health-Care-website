@@ -1,7 +1,9 @@
 <?php
     include '../connect.php';
     $conn = OpenCon();
-
+    if(!isset($_SESSION['Loggedin']) || $_SESSION['Loggedin']!==true || !isset($_SESSION['id'])){
+        header("location: ../admin.php");
+    }
 	// Display information of all hotlines
 	function showHotlines() {
 
@@ -61,7 +63,7 @@
         }
     }
 
-?><?php include '../templates/folheader.html'; ?>
+?><?php include 'header.html'; ?>
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -127,7 +129,7 @@
                     <input type="text" class="form-control" id="type" name="type" >
                 </div>
                 
-                <button type="submit" class="btn btn-sm btn-primary ml-3 mb-2"><h5>Add Hotline</h5></button>
+                <button type="submit" class="btn btn-sm btn-primary ml-3 mb-2"><h5><i class="fas fa fa-plus"></i>Add Hotline</h5></button>
             </form>
         </div>
         <div class="container">

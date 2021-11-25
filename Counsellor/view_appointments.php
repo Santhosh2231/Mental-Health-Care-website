@@ -83,7 +83,7 @@
                     <table class="table table-striped" id="mytables">
                         <thead class="bg-success text-white text-center">
                             <tr >
-                                <th scope="col"><h5>Counsellor Name</h5></th>
+                                <th scope="col"><h5>Helpseeker Name</h5></th>
                                 <th scope="col"><h5>Counselling Date</h5></th>
                                 <th scope="col"><h5>Slot Id</h5></th>
                                 <th scope="col"><h5>Time from</h5></th>
@@ -102,7 +102,7 @@
                     <table class="table table-striped" id="myTable">
                         <thead class="bg-success text-white text-center">
                             <tr >
-                                <th scope="col"><h5>Counsellor Name</h5></th>
+                                <th scope="col"><h5>Helpseeker Name</h5></th>
                                 <th scope="col"><h5>Counselling Date</h5></th>
                                 <th scope="col"><h5>Slot Id</h5></th>
                                 <th scope="col"><h5>Time from</h5></th>
@@ -121,7 +121,7 @@
                     <table class="table table-striped" id="mytable">
                         <thead class="bg-success text-white text-center">
                             <tr >
-                                <th scope="col"><h5>Counsellor Name</h5></th>
+                                <th scope="col"><h5>Helpseeker Name</h5></th>
                                 <th scope="col"><h5>Counselling Date</h5></th>
                                 <th scope="col"><h5>Slot Id</h5></th>
                                 <th scope="col"><h5>Time from</h5></th>

@@ -36,7 +36,6 @@
                         <div class="card-body col-12 col-md-8 offset-md-2 text-center">
                             <div class="card col-12 " style="width: 30rem;">
                                 <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="schedule.php"><h4>Schedule a meeting</h4></a></li>
                                     <li class="list-group-item"><a href="view_appointments.php"><h4>View Appointments</h4></a></li>
                                 </ul>
                             </div>

@@ -6,20 +6,16 @@
         header("location: ../admin.php");
     }
 	// Display information of all hotlines
-	function showusers() {
+	function showTypesOfHelp() {
 
 		global $conn;  
-		$sql = "SELECT * FROM `users` ";
+		$sql = "SELECT * FROM TypesOfHelp";
 		$result = $conn->query($sql);
-        $i=0;
-		while($row = $result->fetch_assoc()) {
-            $i=$i+1; 
+
+		while($row = $result->fetch_assoc()) { 
 			echo "<tr>
-                    <td>".$i."</td>
-					<td>".$row["firstname"]."</td>
-					<td>".$row["secondname"]."</td>
-                    <td>".$row["location"]."</td>
-                    <td>".$row["gender"]."</td>
+					<td>".$row["helpType"]."</td>
+					<td>".$row["description"]."</td>
 				  </tr>";
 		}
 	}
@@ -30,41 +26,31 @@
                 <li class="breadcrumb-item"><a href="home.php">Home</a></li>
                 <li class="breadcrumb-item"><a href="menu.php">Menu</a></li>
                 <li class="breadcrumb-item"><a href="menu.php">Directories</a></li>
-                <li class="breadcrumb-item active">Users</li>
+                <li class="breadcrumb-item active">types of help</li>
             </ol>
             <div class="col-12">
-               <h3>Users</h3>
+               <h3>Types of Help</h3>
                <hr>
             </div>
         </div>
         <div class="container">
             <div class="card">
-                <h2 class="card-header text-white bg-primary text-center">Users</h2>
+                <h2 class="card-header text-white bg-primary text-center">Types of help</h2>
                 <div class="card-body">
                     <table class="table table-striped" id="myTable">
                         <thead class="bg-success text-white">
                             <tr>
-                                <th scope="col" ><h5>S.No</h5></th>
-                                <th scope="col" ><h5>First Name</h5></th>
-                                <th scope="col" ><h5>Last Name</h5></th>
-                                <th scope="col" ><h5>Location</h5></th>
-                                <th scope="col" ><h5>Gender</h5></th>
+                                <th scope="col" class="col-sm-4"><h5>Helptype</h5></th>
+                                <th scope="col" class="col-sm-8"><h5>Description</h5></th>
                             </tr>
                         </thead>
-                        <?php showusers()?>
+                        <?php showTypesOfHelp()?>
                     </table>
                 </div>
             </div>
         </div>
 
-
     </div>
     <?php include '../templates/footer.html'; ?>
-    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready( function () {
-            $('#myTable').DataTable();
-        } );
-    </script>
 </body>
 </html>

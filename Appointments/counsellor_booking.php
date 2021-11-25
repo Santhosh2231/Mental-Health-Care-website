@@ -9,7 +9,7 @@
         $daysOfWeek = array();
         $datesget = array();
         $dayinweek = array();
-        for($i=2;$i<9;$i++){
+        for($i=1;$i<8;$i++){
             $date = date('d-m-Y',strtotime("$i day"));
             $dates = date('Y-m-d',strtotime("$i day"));
             array_push($daysOfWeek,$date);
@@ -28,7 +28,7 @@
         $calendar .= "</tr><tbody class='table table-striped'><tr>";
         $slot = array(1,2,3,4,5);
        $j=0;
-        $slots = array('Slot A :9:30 A.M to 10:30 A.M','Slot B : 9:30 A.M to 10:30 A.M','Slot C : 9:30 A.M to 10:30 A.M','Slot D : 9:30 A.M to 10:30 A.M','Slot E : 9:30 A.M to 10:30 A.M');
+        $slots = array('Slot A :9:30 A.M to 10:30 A.M','Slot B : 11:30 A.M to 12:30 P.M','Slot C : 2:30 A.M to 3:30 A.M','Slot D : 5:30 P.M to 6:30 P.M','Slot E : 7:30 P.M to 8:30 P.M');
        for($p=0;$p<5;$p++){
             $calendar .= "<th scope='row' class='text-center'>$slots[$p]</th>";
             for($i=0;$i<7;$i++){

@@ -1,8 +1,10 @@
 <?php
+include 'templates/iniheader.html';
 $login = false;
 $showError = false;
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     include 'connect.php';
+    $conn = OpenCon();
     $email = $_POST["email"];
     $password = $_POST["password"]; 
     $secpassword = $_POST["secpassword"];
@@ -16,26 +18,45 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $num = mysqli_num_rows($result);
         echo "$num";
         if($num==1){
-            $login = true;
             session_start();
-            $_SESSION['loggedin'] = true;
-            $sql = "select s.no from admin where email='$email' AND password='$password'";
-            $id = mysqli_query($conn,$sql);
+            $_SESSION['Loggedin'] = true;
+            $sql = "select ano from admin where email='$email' AND password='$password'";
+            $result = mysqli_query($conn,$sql);
+            while($row = $result->fetch_assoc()) { 
+                $id = $row['ano'];
+            }
             $_SESSION['id'] = $id;
-            header("location: Admin/home.html");
+            $_SESSION['times'] = 1;
+            header("location: Admin/home.php");
         }
         else{
-            $showError = "Invalid Security Password";
+            $showError = "<script>
+            Swal.fire({
+            title: 'Invalid Login!!',
+            text: 'Please enter correct Security Password !',
+            icon: 'error',
+            button: 'OK',
+            });
+            </script>";
+            echo $showError;
         }
 
     } 
     else{
-        $showError = "Invalid Credentials";
+        $showError = "<script>
+            Swal.fire({
+            title: 'Invalid Login!!',
+            text: 'Please enter valid credentials !',
+            icon: 'error',
+            button: 'OK',
+            });
+            </script>";
+        echo $showError;
     }
     
 }
 
-?><?php include 'templates/iniheader.html'; ?>
+?>
     <div class="container col-12 col-sm-5 " style="margin-top: 10px; margin-bottom: 10px;">
         <div class="card col-12" style="width: 40rem;">
             <br>
@@ -74,5 +95,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>
     </div>
     <?php include 'templates/footer.html'; ?>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

@@ -2,8 +2,11 @@
     session_start();
     include '../connect.php';
     $conn = OpenCon();
+    if(!isset($_SESSION['Loggedin']) || $_SESSION['Loggedin']!==true || !isset($_SESSION['id'])){
+        header("location: ../admin.php");
+    }
 
-?><?php include '../templates/folheader.html'; ?>
+?><?php include 'header.html'; ?>
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">
@@ -95,34 +98,13 @@
                         <div class="card-body col-12 col-md-8 offset-md-2 text-center">
                             <div class="card col-12" style="width: 30rem;">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a href="../Leaderboard/topcounsellor.php"><h4>Top Counsellor</h4></a></li>
-                                    <li class="list-group-item"><a href="../Leaderboard/most_activecounsellor.php"><h4>Most Active Counsellor</h4></a></li>
-                                    <li class="list-group-item"><a href="../Leaderboard/most_active_helpseeker.php"><h4>Most Active Helpseeker</h4></a></li>
+                                    <li class="list-group-item"><a href="topcounsellor.php"><h4>Top Counsellor</h4></a></li>
+                                    <li class="list-group-item"><a href="most_active.php"><h4>Most Active Counsellor</h4></a></li>
+                                    <li class="list-group-item"><a href="most_active_helpseeker.php"><h4>Most Active Helpseeker</h4></a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header" role="tab" id="otherhead">
-                            <h3 class="mb-0">
-                                <a class="collapsed" data-toggle="collapse" data-target="#other">
-                                Others
-                                </a>
-                            </h3>
-                        </div>
-                    </div> 
-                    <div class="collapse" id="other" data-parent="#accordion">
-                        <div class="card-body col-12 col-md-8 offset-md-2 text-center">
-                            <div class="card col-12" style="width: 30rem;">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a href="lookup.php"><h4>Lookup</h4></a></li>
-                                    
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-
                  </div>
             </div>
         </div>

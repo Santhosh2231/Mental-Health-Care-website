@@ -2,7 +2,6 @@
     session_start();
     include '../connect.php';
     $conn = OpenCon();
-    $_SESSION['id'] = 1;
 ?>
 <?php include '../templates/folheader.html'; ?>
     <div class="container">

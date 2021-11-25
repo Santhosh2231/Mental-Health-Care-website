@@ -72,7 +72,7 @@
             } 
         }
     }
-?><?php include '../templates/folheader.html'; ?>
+?><?php include 'header.html'; ?>
     
     <!-- Edit Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
@@ -163,7 +163,7 @@
                         <input type="text" class="form-control" id="phone" name="phone">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-sm btn-primary"><h5>Add Resource Centre</h5></button>
+                <button type="submit" class="btn btn-sm btn-primary"><h5><i class="fas fa fa-plus"></i>Add Resource Centre</h5></button>
                 <!-- <input type="hidden" name="snoEdit" id="deleteid" value="deleteid"> -->
             </form>
         </div>

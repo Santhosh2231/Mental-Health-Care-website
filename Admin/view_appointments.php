@@ -3,6 +3,9 @@
     include '../connect.php';
     include '../templates/folheader.html';
     $conn = OpenCon();
+    if(!isset($_SESSION['Loggedin']) || $_SESSION['Loggedin']!==true || !isset($_SESSION['id'])){
+        header("location: ../admin.php");
+    }
     if(!isset($_SESSION['id'])){
         header("location: ../login.php");
     }
@@ -64,7 +67,7 @@
         global $conn,$id;
         $todaydate = date("Y-m-d");
     
-        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`helpseekerid`='$id'";
+        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid`";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) { 
             if ($todaydate <= $row['date']){
@@ -82,7 +85,7 @@
         global $conn,$id;
         $todaydate = date("Y-m-d");
     
-        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`link` `link`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`helpseekerid`='$id'";
+        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`link` `link`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid`";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) { 
             if ($todaydate == $row['date']){
@@ -101,7 +104,7 @@
         global $conn,$id;
         $todaydate = date("Y-m-d");
     
-        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid` WHERE `booking`.`counsellorid`=6 and `booking`.`helpseekerid`=1";
+        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid`";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) { 
             if ($todaydate > $row['date']){
@@ -120,9 +123,9 @@
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">
-                <li class="breadcrumb-item"><a href="../home.php">Home</a></li>
-                <li class="breadcrumb-item"><a href="../menu.php">Menu</a></li>
-                <li class="breadcrumb-item"><a href="../menu.php">Appointments</a></li>
+                <li class="breadcrumb-item"><a href="home.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="menu.php">Menu</a></li>
+                <li class="breadcrumb-item"><a href="menu.php">Appointments</a></li>
                 <li class="breadcrumb-item active">View Appointments</li>
             </ol>
             <div class="col-12">

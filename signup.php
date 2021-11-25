@@ -42,8 +42,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </script>";
                 echo $success;
                 
-                header("location: login.php");
-                
             }
             else{
                 $showError = "<script>
@@ -67,7 +65,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $sql = "insert into userdata (sno, noofcounsellings, noofreviews) values ($id, 0, 0);";
                 $result = $conn->query($sql);
                 $showAlert = true;
-                header("location: login.php");
+                $success = "<script>
+                Swal.fire({
+                title: 'Registered Succesfully!!',
+                text: 'Now please login into website!',
+                icon: 'success',
+                button: 'OK',
+                });
+                </script>";
+                echo $success;
             }
             else{
                 $showError = "<script>
@@ -215,27 +221,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <button class="btn btn-primary" type="submit" value="submit">Sign up </button>
                         </div>
                     </form>
-                    <?php  
-                        
-                        if($showAlert){
-                        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Success!</strong> Your account is now created and you can login
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div> ';
-                        
-                        }
-                        if($showError){
-                        echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Error!</strong> '. $showError.'
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div> ';
-                        }
-                    
-                    ?>
                     <div class="alert alert-info mt-3" id="login-link">Already have an account? Login <a href="./login.php">here</a></p>
                 </div>
             </body>
@@ -245,6 +230,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div>
 
     <?php include 'templates/footer.html'; ?>
-     <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

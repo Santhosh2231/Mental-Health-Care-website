@@ -106,26 +106,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header" role="tab" id="otherhead">
-                            <h3 class="mb-0">
-                                <a class="collapsed" data-toggle="collapse" data-target="#other">
-                                Others
-                                </a>
-                            </h3>
-                        </div>
-                    </div> 
-                    <div class="collapse" id="other" data-parent="#accordion">
-                        <div class="card-body col-12 col-md-8 offset-md-2 text-center">
-                            <div class="card col-12" style="width: 30rem;">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a href="lookup.php"><h4>Lookup</h4></a></li>
-                                    
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
 
                  </div>
             </div>

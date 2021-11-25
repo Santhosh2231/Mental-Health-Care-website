@@ -22,8 +22,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             while($row = $result->fetch_assoc()) { 
                 $id = $row['cno'];
             }
-            echo $id;
             $_SESSION['id'] = $id;
+            $_SESSION['usertype'] = $type;
+            $_SESSION['times'] = 1;
             header("location: counsellor/home.php");
 
         } 
@@ -53,6 +54,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
         
             $_SESSION['id'] = $id;
+            $_SESSION['usertype'] = $type;
+            $_SESSION['times'] = 1;
             header("location: home.php");
 
         } 
@@ -114,14 +117,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div>
     <?php include 'templates/footer.html'; ?>
      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-     <?php
-        if($login==false){
-            ?>
-            <script>
-                // swal("Oops...!","<?php echo $showError ?>","error");
-            </script>
-            <?php
-        }
-     ?>
+     
 </body>
 </html>
