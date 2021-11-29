@@ -1,6 +1,7 @@
 <?php
+    session_start();
     include '../connect.php';
-	$conn = OpenCon();
+    $conn = OpenCon();
     if(!isset($_SESSION['Loggedin']) || $_SESSION['Loggedin']!==true || !isset($_SESSION['id'])){
         header("location: ../admin.php");
     }

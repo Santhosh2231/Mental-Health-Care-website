@@ -4,8 +4,8 @@
     <div class="container row-content" style="margin: top 100px;">
 
         <br>
-        <ol class="col-12 breadcrumb">
-            <li class="breadcrumb-item"><h3>Help for Mental illness</h3></li>
+        <ol class="col-12 breadcrumb bg-primary text-white">
+            <li class="breadcrumb-item "><h3>Help for Mental illness</h3></li>
         </ol>
         <div class="container">
             <p>If you or someone you know has a mental illness, is struggling emotionally, or has concerns about their mental health, there are ways to get help. Use these resources to find help for you, a friend, or a family member.
@@ -15,7 +15,7 @@ Federal Resources: Some federal agencies offer resources for identifying health 
             </p>
         </div>
         <br>
-        <ol class="col-12 breadcrumb">
+        <ol class="col-12 breadcrumb bg-primary text-white">
                 <li class="breadcrumb-item"><h3>About US</h3></li>
         </ol>
         <br>
@@ -41,24 +41,5 @@ Federal Resources: Some federal agencies offer resources for identifying health 
         <br>
     </div>
     <?php include './templates/footer.html'; ?> 
-    <script>
-        $(document).ready(function(){
-            $('#mycarousel').carousel({ interval : 1000})
-            $("#carouselButton").click(function(){
-                if ($("#carouselButton").children("span").hasClass('fa-pause')) {
-                    $("#mycarousel").carousel('pause');
-                    $("#carouselButton").children("span").removeClass('fa-pause');
-                    $("#carouselButton").children("span").addClass('fa-play');
-                }
-                else if ($("#carouselButton").children("span").hasClass('fa-play')){
-                    $("#mycarousel").carousel('cycle');
-                    $("#carouselButton").children("span").removeClass('fa-play');
-                    $("#carouselButton").children("span").addClass('fa-pause');                    
-                }
-            });
-        })
-    </script>
-
-
 </body>
 </html>

@@ -80,4 +80,3 @@ function createMeeting($data = array())
     }
     return json_decode($result);
 }
-

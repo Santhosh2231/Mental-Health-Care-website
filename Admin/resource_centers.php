@@ -1,9 +1,11 @@
 <?php
 	
-    include '../connect.php';
     session_start();
-	$conn = OpenCon();
-
+    include '../connect.php';
+    $conn = OpenCon();
+    if(!isset($_SESSION['Loggedin']) || $_SESSION['Loggedin']!==true || !isset($_SESSION['id'])){
+        header("location: ../admin.php");
+    }
 	// get and display all resource centre information
 	function showResourceCentres() {
 		global $conn;  

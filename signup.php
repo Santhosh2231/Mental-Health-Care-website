@@ -47,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $showError = "<script>
                 Swal.fire({
                 title: 'Registration unsuccessful!',
-                text: 'please retry by providing details!',
+                text: 'You have been registered already!',
                 icon: 'error',
                 button: 'OK',
                 });
@@ -79,7 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $showError = "<script>
                 Swal.fire({
                 title: 'Registration unsuccessful!',
-                text: 'please retry by providing details!',
+                text: 'You have been registered already!',
                 icon: 'error',
                 button: 'OK',
                 });

@@ -11,11 +11,11 @@
 	function deleteUser() {
 		global $conn;
         $id = $_SESSION['id'];  
-        $sql = "DELETE FROM `booking` WHERE `booking`.`helpseekerid`=$id";
+        $sql = "DELETE FROM `booking` WHERE `booking`.`counsellorid`=$id";
         $result = mysqli_query($conn,$sql);
-        $sql = "DELETE FROM `review` WHERE `review`.`authorid`=$id";
+        $sql = "DELETE FROM `review` WHERE `review`.`counsellorid`=$id";
         $result = mysqli_query($conn,$sql);
-		$sql = "DELETE FROM `users` WHERE sno = '".$id."'";
+		$sql = "DELETE FROM `counsellors` WHERE cno = '".$id."'";
 		$result = mysqli_query($conn,$sql);
         session_destroy();
         header("Location: ../login.php"); 

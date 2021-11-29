@@ -9,70 +9,17 @@
     if(!isset($_SESSION['id'])){
         header("location: ../login.php");
     }
-    $id = $_SESSION['id'];
-    if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        global $conn;
-        $Cid = $_SESSION['Cid'];
-        $Hid = $_SESSION['id'];
-        $date = $_SESSION["date"];
-        $slot = $_SESSION["slotid"];
-        $type = $_POST["pay"];
-        include('config.php');
-        include('api.php');
-        if($slot==1){
-            $date = $date." "."09:30:00";
-        }
-        else if ($slot==2){
-            $date = $date." "."09:30:00";
-        }
-        else if ($slot==3){
-            $date = $date." "."09:30:00";
-        }
-        else if ($slot==4){
-            $date = $date." "."09:30:00";
-        }
-        else if ($slot==5){
-            $date = $date." "."09:30:00";
-        }
-        $arr['start_date']= date($date);
-        $arr['duration']=60;
-        $arr['password']='mental';
-        $arr['type']='2';
-
-        $result = createMeeting($arr);
-        if(isset($result->id)){
-            $link = $result->join_url;
-        }else{
-            echo '<pre>';
-            print_r($result);
-        }
-        $sql = "INSERT INTO `booking`(`bookingid`, `counsellorid`, `helpseekerid`, `date`, `slotno`, `PaymentType`,`link`) VALUES ('NULL','$Cid','$Hid','$date','$slot','$type','$link')";
-        $result = $conn->query($sql);
-        if($result){
-            $alert="<script>
-            Swal.fire({
-            title: 'Booking successfully Done!',
-            icon: 'success',
-            button: 'OK',
-            });
-            </script>";
-            echo $alert;
-        }
-        unset($_SESSION['Cid']);
-        unset($_SESSION['date']);
-        unset($_SESSION['slotid']);
-        
-    }
     function upcoming(){
         global $conn,$id;
         $todaydate = date("Y-m-d");
     
-        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid`";
+        $sql = "SELECT `counsellors`.`firstname` `cno`, `users`.`firstname` `sno`, `booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `users` ON `booking`.`helpseekerid`=`users`.`sno` LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid`";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) { 
             if ($todaydate <= $row['date']){
                 echo "<tr class='text-center'>
                         <td>Dr. ".$row["cno"]."</td>
+                        <td>".$row["sno"]."</td>
                         <td>".$row["date"]."</td>
                         <td>".$row["slotid"]."</td>
                         <td>".$row["from"]."</td>
@@ -85,12 +32,13 @@
         global $conn,$id;
         $todaydate = date("Y-m-d");
     
-        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`link` `link`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid`";
+        $sql = "SELECT `counsellors`.`firstname` `cno`, `users`.`firstname` `sno`,`booking`.`link` `link`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `users` ON `booking`.`helpseekerid`=`users`.`sno` LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid`";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) { 
             if ($todaydate == $row['date']){
                 echo "<tr class='text-center'>
                         <td>Dr. ".$row["cno"]."</td>
+                        <td>".$row["sno"]."</td>
                         <td>".$row["date"]."</td>
                         <td>".$row["slotid"]."</td>
                         <td>".$row["from"]."</td>
@@ -104,12 +52,13 @@
         global $conn,$id;
         $todaydate = date("Y-m-d");
     
-        $sql = "SELECT `counsellors`.`firstname` `cno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid`";
+        $sql = "SELECT `counsellors`.`firstname` `cno`, `users`.`firstname` `sno`,`booking`.`date` `date`,`slot`.`slotid` `slotid`, `slot`.`timefrom` `from`,`slot`.`timeto` `to` FROM booking LEFT JOIN `users` ON `booking`.`helpseekerid`=`users`.`sno` LEFT JOIN `counsellors` ON `booking`.`counsellorid`=`counsellors`.`cno` LEFT JOIN `slot` ON `booking`.`slotno`=`slot`.`slotid`";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) { 
             if ($todaydate > $row['date']){
                 echo "<tr class='text-center'>
                         <td>Dr. ".$row["cno"]."</td>
+                        <td>".$row["sno"]."</td>
                         <td>".$row["date"]."</td>
                         <td>".$row["slotid"]."</td>
                         <td>".$row["from"]."</td>
@@ -141,6 +90,7 @@
                         <thead class="bg-success text-white text-center">
                             <tr >
                                 <th scope="col"><h5>Counsellor Name</h5></th>
+                                <th scope="col"><h5>Helpseeker Name</h5></th>
                                 <th scope="col"><h5>Counselling Date</h5></th>
                                 <th scope="col"><h5>Slot Id</h5></th>
                                 <th scope="col"><h5>Time from</h5></th>
@@ -161,6 +111,7 @@
                         <thead class="bg-success text-white text-center">
                             <tr >
                                 <th scope="col"><h5>Counsellor Name</h5></th>
+                                <th scope="col"><h5>Helpseeker Name</h5></th>
                                 <th scope="col"><h5>Counselling Date</h5></th>
                                 <th scope="col"><h5>Slot Id</h5></th>
                                 <th scope="col"><h5>Time from</h5></th>
@@ -180,6 +131,7 @@
                         <thead class="bg-success text-white text-center">
                             <tr >
                                 <th scope="col"><h5>Counsellor Name</h5></th>
+                                <th scope="col"><h5>Helpseeker Name</h5></th>
                                 <th scope="col"><h5>Counselling Date</h5></th>
                                 <th scope="col"><h5>Slot Id</h5></th>
                                 <th scope="col"><h5>Time from</h5></th>
