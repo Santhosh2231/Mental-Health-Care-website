@@ -1,5 +1,5 @@
 <?php
-define('API_KEY','hEpnHXsYSlaNyTxZuv8bhA');
-define('API_SECRET','O7gQhhPQc3aVNj3T9ahYcWA1BmxyGQNHmkj9');
-define('EMAIL_ID','santhosh.raminedi22@gmail.com');
+define('API_KEY','XXXX'); // Zoom Api Key
+define('API_SECRET','XXXXX'); // Zoom API secret key
+define('EMAIL_ID','XXXXX'); // Your zoom secret key registered gmail
 ?>
