@@ -1,0 +1,3 @@
+# Mental-Health-Care-website
+Mental health web application helps people in need of proper mental health guidance connect with authorized counsellors . Our web application acts as a one-stop-shop for one’s mental health resources, whether that be hotlines, resource centers, or even to search and book potential counsellors. The users will be also able to view/post reviews of the counsellors, thus having better clarity when choosing a counsellor. Thus we can help build a platform, which improves one’s attitude towards self-help and help-seeking, ultimately assisting towards improved wellbeing. 
+![image](https://user-images.githubusercontent.com/87355988/157178437-5ccf06ca-36d3-4b2a-ba67-22df0bdc69cb.png)
